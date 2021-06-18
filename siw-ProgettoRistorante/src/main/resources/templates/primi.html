@@ -23,14 +23,28 @@
 				<td>
 					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>
 				</td>	
-				<td>	
+				<td th:if="${ristoratoreCorrente == null}">	
 					<input style="width: 40px" type="number" value="1" />		
 				</td>
-				<td>	
+				<td th:if="${ristoratoreCorrente == null}">	
 					<form th:href="@{admin/addCarello}" th:action="@{admin/addCarello}"
 					      th:method="GET">
 					      <button type="submit">&#128722;</button>
 					</form>
+				</td>
+				<td th:if="${ristoratoreCorrente != null}">
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
+				          th:method="GET">
+				          <button type="submit">Modifica</button>
+					</form>				
+				</td>
+				<td th:if="${ristoratoreCorrente != null}">	
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+				          th:method="GET">
+				          <button type="submit">Elimina</button>
+					</form>	
 				</td>
 			</tr>
 			<tr>
