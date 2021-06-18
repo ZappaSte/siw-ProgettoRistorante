@@ -26,4 +26,41 @@ public class ProdottoController {
 		model.addAttribute("primi", primi);
 		return "primi";
 	}
+	
+	@RequestMapping(value="/secondi", method=RequestMethod.GET)
+	public String showSecondi(Model model) {
+		List<Prodotto> secondi = this.prodottoService.findAllSecondi();
+		model.addAttribute("secondi", secondi);
+		return "primi";
+	}
+	
+	@RequestMapping(value="/contorni", method=RequestMethod.GET)
+	public String showContorni(Model model) {
+		List<Prodotto> contorni = this.prodottoService.findAllContorni();
+		model.addAttribute("contorni", contorni);
+		return "primi";
+	}
+	
+	@RequestMapping(value="/bevande", method=RequestMethod.GET)
+	public String showBevande(Model model) {
+		List<Prodotto> bevande = this.prodottoService.findAllBevande();
+		model.addAttribute("bevande", bevande);
+		return "primi";
+	}
+	
+	@RequestMapping(value="/pizze", method=RequestMethod.GET)
+	public String showPizze(Model model) {
+		List<Prodotto> pizze = this.prodottoService.findAllPizze();
+		model.addAttribute("pizze", pizze);
+		return "primi";
+	}
+	
+	@RequestMapping(value="/vini", method=RequestMethod.GET)
+	public String showVini(Model model) {
+		List<Prodotto> vini = this.prodottoService.findAllVini();
+		model.addAttribute("vini", vini);
+		return "primi";
+	}
+	
+
 }
