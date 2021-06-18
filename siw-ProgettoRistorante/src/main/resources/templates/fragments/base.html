@@ -14,12 +14,43 @@
 		 	<a style="text-decoration:none" th:href="@{/logout}">Logout </a>
 		</span>		
 	</div>
-	
+		
+	<ul class="Navigator" th:fragment = "navigator">
+		<li>
+			<a style="text-decoration:none" href="/">Home</a>
+		</li>
+		<li>
+			<a style="text-decoration:none" href="primi.html" th:action="@{/primi}" 
+			   th:href="@{/primi}">Primi Piatti</a>
+		</li>
+		<li>
+		   	<a style="text-decoration:none" href="secondi.html" th:action="@{/secondi}"
+		   	   th:href="@{/secondi}">Secondi Piatti</a>
+	   	</li>
+	   	<li>
+		   	<a style="text-decoration:none" href="pizze.html" th:action="@{/pizze}" 
+		   	   th:href="@{/pizze}">Pizze</a>
+	   	</li>
+	   	<li>
+		   	<a style="text-decoration:none" href="dolci.html" th:action="@{/dolci}"
+		   	   th:href="@{/dolci}">Dolci</a>
+	   	</li>
+	   	<li>
+		   	<a style="text-decoration:none" href="vini.html" th:action="@{/vini}"
+		   	   th:href="@{/vini}">Lista Vini</a>
+	   	</li>
+	   	<li>
+		   	<a style="text-decoration:none" href="bevande.html" th:action="@{/bevande}"
+		   	   th:href="@{/bevande}">Bevande</a>	
+	   	</li>
+	</ul>
 	
 	<div class="Footer" th:fragment = "footer">
+		<!-- 
 		<footer>Viale Europa 180 - San Benedetto del Tronto (AP) - 63074
 				&nbsp&nbsp&nbsp
 				email: cibo.musica@libero.com &nbsp pec: cibo.musica@pec.com &nbsp tel: 0735/5294883</footer>
+		 -->
 	</div>
 </body>
 </html>

@@ -6,62 +6,10 @@
 </head>
 <body>
 	<div th:replace="fragments/base.html :: login"></div>
-
+	
 	<h4>Menu Cibo & Musica</h4>
 
-	<div class="Corpo">
-		<table>
-			<tr>
-				<td>
-					<form th:action="@{/primi}">
-						<button type="submit">Primi Piatti</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Secondi Piatti</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Pizze</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Dolci</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Lista Vini</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Bevande</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<form>
-						<button type="submit">Coktails</button>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<div th:replace="fragments/base.html :: navigator"></div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>
 </body>

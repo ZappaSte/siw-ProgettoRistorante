@@ -1,24 +1,65 @@
 .InOut {
-		border-radius: 10px 10px 10px 10px;
-		text-align: right;
-		background: red;
-		margin-left: 84%;
-		font-weight: bold;
+	border-radius: 10px 10px 10px 10px;
+	text-align: right;
+	background: red;
+	margin-left: 84%;
+	font-weight: bold;
 	}
 
 h4 {
-  height: 20%px;
-  color: red;
-  margin: 8%;
-  line-height: 30px;
-  font-size: 40px;
-  text-align: center;
-  font-weight: bold;
-  font-family: "Times New Roman", Georgia, Serif;
-  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+	height: 20%px;
+	color: red;
+	margin: 8%;
+	line-height: 30px;
+	font-size: 40px;
+	text-align: center;
+	font-weight: bold;
+	font-family: "Times New Roman", Georgia, Serif;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+	}
+
+.Navigator {
+    list-style-type: none; /*Rimuove i proiettili*/
+    padding: 0;
+    margin-left: 1%;
+    }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%; /*collegato a margin-left di .Corpo*/
+    background-color: #f1f1f1;
+    border: 1px solid #555;
+    /*height: 100%; /* Tutta l'altezza */
+    position: fixed; /* Fallo aderire, anche sullo scorrimento */
+    overflow: auto; /* Abilita lo scorrimento se il sidenav ha troppi contenuti */
 }
 
-button, .button {
+.Corpo {
+  margin-left: 20%; /*Collegato a width di ul*/
+	}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+    text-align: center;
+    border-bottom: 1px solid #555;
+}
+
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+/*.active {
+    background-color: #4CAF50;
+    color: white;
+}*/
+
+/*button, .button {
   border-radius: 10px 10px 10px 10px;
   margin-bottom: 1%;
   width:150px;
@@ -29,13 +70,25 @@ button, .button {
   text-align: center;
   outline: none;
   text-decoration: none;
-}
+}*/
 
 body {
   height:100%;
   background:lightskyblue;
 }
 
-.Corpo {
-  margin-left: 20%;
-	}
+.MyQuantita{width: 45px;}
+
+	
+/*.Footer{
+		border-radius: 10px 10px 10px 10px;
+		text-align: center;
+		margin-left: 1%;
+		margin-right: 1%;
+		background: lightgray;
+		padding: auto;
+		font-size: 13px;
+		font-weight: bold;
+		font-style: italic;
+		font-family: "Times New Roman", Georgia, Serif;
+	}*/
