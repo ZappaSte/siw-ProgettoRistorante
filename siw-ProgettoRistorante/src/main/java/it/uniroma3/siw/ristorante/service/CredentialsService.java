@@ -1,0 +1,37 @@
+package it.uniroma3.siw.ristorante.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+
+import it.uniroma3.siw.ristorante.model.Credentials;
+import it.uniroma3.siw.ristorante.repository.CredentialsRepository;
+
+public class CredentialsService {
+
+	 @Autowired
+	    protected PasswordEncoder passwordEncoder;
+
+		@Autowired
+		protected CredentialsRepository credentialsRepository;
+		
+		@Transactional
+		public Credentials getCredentials(Long id) {
+			Optional<Credentials> result = this.credentialsRepository.findById(id);
+			return result.orElse(null);
+		}
+
+		@Transactional
+		public Credentials getCredentials(String username) {
+			Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
+			return result.orElse(null);
+		}
+			
+	    @Transactional
+	    public Credentials saveCredentials(Credentials credentials) {
+	        credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));
+	        return this.credentialsRepository.save(credentials);
+	    }
+}
