@@ -7,6 +7,18 @@
 	font-weight: bold;
 	}
 
+.Titolo{
+	float: left; 
+	margin-right: 5%; 
+	margin-left: 1.5%;
+	margin-top:1%;
+}
+
+.Logo{
+	width: 200px;
+	height: 200px;
+}
+
 h4 {
 	height: 20%px;
 	color: red;
