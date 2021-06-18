@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles"> 
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	<h4>Inserimento Prodotto</h4>
+	
+	<div class="Corpo"> 			
+		<form th:action="@{/admin/prodottoForm}" method="POST">
+			<table>
+				<tr>
+		            <td>Nome</td>
+		            <td><input type="text" placeholder="nome" required
+		                       th:field="${prodotto.nome}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Prezzo</td>
+		            <td><input type="number" placeholder="prezzo"
+		                       th:field="${prodotto.prezzo}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Descrizione</td>
+		            <td><input type="text" placeholder="descrizione"
+		                       th:field="${prodotto.descrizione}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Categoria:</td>
+		            <td>
+		            	<select th:field="${prodotto.categoria}">
+			            	<option>Primo</option>
+			            	<option>Secondo</option>
+			            	<option>Pizza</option>
+			            	<option>Dolce</option>
+			            	<option>Vino</option>
+			            	<option>Bevanda</option>
+			            	<option>Cocktails</option>
+			            </select>
+					</td>
+		        </tr>
+		        <tr>
+		            <td>
+		                <button type="submit">Conferma Inserimento</button>
+		                <input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+		            </td>
+		        </tr>
+	    	</table>
+		</form>
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>

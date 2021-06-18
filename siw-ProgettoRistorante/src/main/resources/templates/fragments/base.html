@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+	<meta charset="UTF-8" />
+	<link th:href="@{/css/my-style.css}" rel="stylesheet">
+</head>
+<body>
+	<div class="InOut" th:fragment = "login">
+		<span th:if="${ristoratoreCorrente == null}">
+			<a style="text-decoration:none" th:href="@{/login}">Accedi</a>
+		</span>
+		<span th:if="${ristoratoreCorrente != null}">
+			<a th:text="|${accountCorrente.username}|"></a>
+		 	<a style="text-decoration:none" th:href="@{/logout}">Logout </a>
+		</span>		
+	</div>
+	
+	
+	<div class="Footer" th:fragment = "footer">
+		<footer>Viale Europa 180 - San Benedetto del Tronto (AP) - 63074
+				&nbsp&nbsp&nbsp
+				email: cibo.musica@libero.com &nbsp pec: cibo.musica@pec.com &nbsp tel: 0735/5294883</footer>
+	</div>
+</body>
+</html>
