@@ -1,10 +1,13 @@
 package it.uniroma3.siw.ristorante.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,8 +20,13 @@ import it.uniroma3.siw.ristorante.service.ProdottoService;
 public class ProdottoController {
 
 	
+	private List<Prodotto> carrello = new ArrayList<>();
+	
 	@Autowired
 	public ProdottoService prodottoService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping(value="/primi", method=RequestMethod.GET)
 	public String showPrimi(Model model) {
@@ -62,5 +70,20 @@ public class ProdottoController {
 		return "primi";
 	}
 	
+	@RequestMapping(value ="/addProdottoCarrello/{id}", method=RequestMethod.POST)
+	public String addProdottoCarrello(@PathVariable("id") Long id, Model model) {
+		if(id==null) {
+			return "error";
+		}
+		else {
+			Prodotto prodotto= prodottoService.findById(id);
+			if (session.getAttribute("carrello")==null){
+				session.setAttribute("carrello", carrello);
+			}
+
+			carrello.add(prodotto);
+			return "redirect:";
+		}
+	}
 
 }

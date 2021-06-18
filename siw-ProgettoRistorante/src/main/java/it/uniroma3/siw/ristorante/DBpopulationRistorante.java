@@ -48,15 +48,37 @@ public class DBpopulationRistorante implements ApplicationRunner{
 		p2.setCategoria(Prodotto.PRIMO_CAT);
 		
 		
-		/*Prodotto p3 = new Prodotto("Spaghetti alle Vongole",9.5f, "Spaghetti con vongole fresche", Prodotto.PRIMO_CAT);
-		Prodotto p4 = new Prodotto("Risotto agli Scampi",9.5f, "Risotto con scampi freschi", Prodotto.PRIMO_CAT);*/
+		Prodotto p3 = new Prodotto("Spaghetti alle Vongole",9.5f, "Spaghetti con vongole fresche", Prodotto.PRIMO_CAT);
+		Prodotto p4 = new Prodotto("Risotto agli Scampi",9.5f, "Risotto con scampi freschi", Prodotto.PRIMO_CAT);
+		Prodotto p5 = new Prodotto("Scaloppine al Limone",12.0f, "Scaloppine di pollo al limone", Prodotto.SECONDO_CAT);
+		Prodotto p6 = new Prodotto("Bistecca di Manzo",18f, "Bistecca di manzo, taglio fiorentina", Prodotto.SECONDO_CAT);
+		Prodotto p7 = new Prodotto("Frittura di Mare",15f, "Frittura di pesce con calamari e moscardini", Prodotto.SECONDO_CAT);
+		Prodotto p8 = new Prodotto("Patate al Forno",7f, "Patate al forno con rosmarino", Prodotto.CONTORNO_CAT);
+		Prodotto p9 = new Prodotto("Cicoria Ripassata",5f, "Cicoria Ripassata con peperoncino", Prodotto.CONTORNO_CAT);
+		Prodotto p10 = new Prodotto("Insalata",5f, "Insalatya di lattuga, carote e finocchi", Prodotto.CONTORNO_CAT);
+		Prodotto p11 = new Prodotto("Polpo con patate", 12f, "Polpo con patate", Prodotto.SECONDO_CAT);
+		Prodotto p12 = new Prodotto("Coca Cola",2.5f, "1.5LT", Prodotto.BEVANDE_CAT);
+		Prodotto p13 = new Prodotto("Sprite",9.5f, "33cL", Prodotto.BEVANDE_CAT);
+		Prodotto p14 = new Prodotto("Vino Rosso",9.5f, "Vino rosso dei castelli", Prodotto.VINO_CAT);
+		Prodotto p15 = new Prodotto("Falanghina",9.5f, "Vino bianco, falanghina beneventana", Prodotto.VINO_CAT);
 	
 		
 		
 		prodottoRepository.save(p1);
 		prodottoRepository.save(p2);
-		//prodottoRepository.save(p3);
-		//prodottoRepository.save(p4);
+		prodottoRepository.save(p3);
+		prodottoRepository.save(p4);
+		prodottoRepository.save(p5);
+		prodottoRepository.save(p6);
+		prodottoRepository.save(p7);
+		prodottoRepository.save(p8);
+		prodottoRepository.save(p9);
+		prodottoRepository.save(p10);
+		prodottoRepository.save(p11);
+		prodottoRepository.save(p12);
+		prodottoRepository.save(p13);
+		prodottoRepository.save(p14);
+		prodottoRepository.save(p15);
 		
 		
 		Ristoratore r1 = new Ristoratore();
