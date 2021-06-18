@@ -28,7 +28,7 @@ public class Credentials {
 	@Column(nullable = false)
 	private String role;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = {CascadeType.MERGE})
 	private Ristoratore ristoratore;
 	
 	
