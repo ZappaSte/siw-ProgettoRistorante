@@ -39,36 +39,45 @@ public class ProdottoController {
 	public String showSecondi(Model model) {
 		List<Prodotto> secondi = this.prodottoService.findAllSecondi();
 		model.addAttribute("secondi", secondi);
-		return "primi";
+		return "secondi";
 	}
 	
 	@RequestMapping(value="/contorni", method=RequestMethod.GET)
 	public String showContorni(Model model) {
 		List<Prodotto> contorni = this.prodottoService.findAllContorni();
 		model.addAttribute("contorni", contorni);
-		return "primi";
-	}
-	
-	@RequestMapping(value="/bevande", method=RequestMethod.GET)
-	public String showBevande(Model model) {
-		List<Prodotto> bevande = this.prodottoService.findAllBevande();
-		model.addAttribute("bevande", bevande);
-		return "primi";
+		return "contorni";
 	}
 	
 	@RequestMapping(value="/pizze", method=RequestMethod.GET)
 	public String showPizze(Model model) {
 		List<Prodotto> pizze = this.prodottoService.findAllPizze();
 		model.addAttribute("pizze", pizze);
-		return "primi";
+		return "pizze";
+	}
+	
+	@RequestMapping(value="/dolci", method=RequestMethod.GET)
+	public String showDolci(Model model) {
+		List<Prodotto> dolci = this.prodottoService.findAllDolci();
+		model.addAttribute("dolci", dolci);
+		return "dolci";
 	}
 	
 	@RequestMapping(value="/vini", method=RequestMethod.GET)
 	public String showVini(Model model) {
 		List<Prodotto> vini = this.prodottoService.findAllVini();
 		model.addAttribute("vini", vini);
-		return "primi";
+		return "vini";
 	}
+	
+	@RequestMapping(value="/bevande", method=RequestMethod.GET)
+	public String showBevande(Model model) {
+		List<Prodotto> bevande = this.prodottoService.findAllBevande();
+		model.addAttribute("bevande", bevande);
+		return "bevande";
+	}
+	
+	
 	
 	@RequestMapping(value ="/addProdottoCarrello/{id}", method=RequestMethod.POST)
 	public String addProdottoCarrello(@PathVariable("id") Long id, Model model) {

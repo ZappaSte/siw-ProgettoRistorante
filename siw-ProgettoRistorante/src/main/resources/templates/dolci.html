@@ -13,29 +13,33 @@
 	
 	<div class="Corpo">
  		&nbsp;
-		<table th:each="prodotto : ${dolci}">
-			<tr>
-				<td>
-					<b><a  th:text="| ${prodotto.nome}|">Nome</a></b>
-				</td>
-				<td>
-					<a  th:text="| ${prodotto.prezzo} &euro;|">Prezzo</a>
-				</td>	
-				<td>	
-					<input class="MyQuantita" type="number" value="1"/>		
-				</td>
-				<td>	
-					<form th:href="@{admin/addCarello}" th:action="@{admin/addCarello}"
-				          th:method="GET">
-				          <button type="submit">&#128722;</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<i><a th:text="|${prodotto.descrizione}|">Descrizione</a></i>
-				</td>
-			</tr>
+		<table class="Prodotto" th:each="prodotto : ${dolci}">
+			<table class="ProdottoNome">
+				<tr>
+					<td>
+						<b><a  th:text="${prodotto.nome}">Nome</a></b>
+					</td>
+					<td>
+						<a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a>
+					</td>	
+					<td>	
+						<input class="MyQuantita" type="number" value="1"/>		
+					</td>
+					<td>	
+						<form th:href="@{admin/addCarello}" th:action="@{admin/addCarello}"
+					          th:method="GET">
+					          <button type="submit">&#128722;</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<table class="DescrizioneProdotto">
+				<tr>
+					<td>
+						<i><a th:text="|${prodotto.descrizione}|">Descrizione</a></i>
+					</td>
+				</tr>
+			</table>
 			&nbsp;			
 	    </table>
 	</div>

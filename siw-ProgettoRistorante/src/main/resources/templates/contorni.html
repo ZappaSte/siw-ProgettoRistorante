@@ -7,13 +7,13 @@
 <body>
 	<div th:replace="fragments/base.html :: login"></div>
 
-	<h4>Primi Piatti</h4>
+	<h4>Contorni</h4>
 
 	<div th:replace="fragments/base.html :: navigator"></div>
 	
 	<div class="Corpo">
  		&nbsp;
-		<table class="Prodotto" th:each="prodotto : ${primi}">
+		<table class="Prodotto" th:each="prodotto : ${contorni}">
 			<table class="ProdottoNome">
 				<tr>
 					<td>

@@ -28,9 +28,13 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'PIZZA'")
 	public List<Long> findAllPizze();
 	
-	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'BEVANDE'")
-	public List<Long> findAllBevande();
+	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'DOLCI'")
+	public List<Long> findAllDolci();
 	
 	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'VINO'")
 	public List<Long> findAllVini();
+	
+	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'BEVANDE'")
+	public List<Long> findAllBevande();
+	
 }

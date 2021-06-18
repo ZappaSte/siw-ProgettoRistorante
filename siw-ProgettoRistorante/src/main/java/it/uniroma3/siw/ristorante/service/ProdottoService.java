@@ -77,17 +77,6 @@ public class ProdottoService {
 	}
 	
 	@Transactional
-	public List<Prodotto> findAllBevande() {
-		List<Long> idProd  = this.prodottoRepository.findAllBevande();
-		List<Prodotto> prodotti = new ArrayList<>();
-		for(Long id : idProd) {
-			prodotti.add(this.findById(id));
-		}
-
-		return 	prodotti;
-	}
-	
-	@Transactional
 	public List<Prodotto> findAllPizze() {
 		List<Long> idProd  = this.prodottoRepository.findAllPizze();
 		List<Prodotto> prodotti = new ArrayList<>();
@@ -99,6 +88,16 @@ public class ProdottoService {
 	}
 	
 	@Transactional
+	public List<Prodotto> findAllDolci() {
+		List<Long> idProd  = this.prodottoRepository.findAllDolci();
+		List<Prodotto> prodotti = new ArrayList<>();
+		for(Long id : idProd) {
+			prodotti.add(this.findById(id));
+		}
+
+		return 	prodotti;
+	}
+	@Transactional
 	public List<Prodotto> findAllVini() {
 		List<Long> idProd  = this.prodottoRepository.findAllVini();
 		List<Prodotto> prodotti = new ArrayList<>();
@@ -108,5 +107,16 @@ public class ProdottoService {
 
 		return 	prodotti;
 	}
+	
+	@Transactional
+	public List<Prodotto> findAllBevande() {
+		List<Long> idProd  = this.prodottoRepository.findAllBevande();
+		List<Prodotto> prodotti = new ArrayList<>();
+		for(Long id : idProd) {
+			prodotti.add(this.findById(id));
+		}
+
+		return 	prodotti;
+	}	
 	
 }

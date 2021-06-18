@@ -12,9 +12,12 @@ public class Prodotto {
 	public static final String PRIMO_CAT = "PRIMO";
 	public static final String SECONDO_CAT = "SECONDO";
 	public static final String CONTORNO_CAT = "CONTORNO";
-	public static final String BEVANDE_CAT = "BEVANDE";
 	public static final String PIZZA_CAT = "PIZZA";
+	public static final String DOLCE_CAT = "DOLCE";
 	public static final String VINO_CAT = "VINO";
+	public static final String BEVANDE_CAT = "BEVANDE";
+	
+	
 	
 	/*DEFINIZIONE VARIABILI*/
 
