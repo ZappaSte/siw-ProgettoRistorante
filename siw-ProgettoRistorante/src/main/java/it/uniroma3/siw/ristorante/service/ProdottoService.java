@@ -1,5 +1,6 @@
 package it.uniroma3.siw.ristorante.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,17 @@ public class ProdottoService {
 
 	public Object findAll() {
 		return prodottoRepository.findAll();
+	}
+
+	@Transactional
+	public List<Prodotto> findAllPrimi() {
+		List<Long> idProd  = this.prodottoRepository.findAllPrimi();
+		List<Prodotto> prodotti = new ArrayList<>();
+		for(Long id : idProd) {
+			prodotti.add(this.findById(id));
+		}
+
+		return 	prodotti;
 	}
 	
 }

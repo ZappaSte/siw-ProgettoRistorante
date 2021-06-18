@@ -9,6 +9,11 @@ import javax.persistence.Id;
 @Entity
 public class Prodotto {
 	
+	public static final String PRIMO_CAT = "PRIMO";
+	public static final String SECONDO_CAT = "SECONDO";
+	public static final String CONTORNO_CAT = "CONTORNO";
+	public static final String BEVANDE_CAT = "BEVANDE";
+	
 	/*DEFINIZIONE VARIABILI*/
 
 	@Id
@@ -31,6 +36,10 @@ public class Prodotto {
 		this.prezzo = prezzo;
 		this.descrizione = descrizione;	
 		this.categoria = categoria;
+	}
+
+	public Prodotto() {
+		
 	}
 
 	/****************************************************************************************************/

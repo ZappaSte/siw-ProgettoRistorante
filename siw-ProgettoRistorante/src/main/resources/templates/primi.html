@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+	<link th:href="@{/css/my-style.css}" rel="stylesheet">
+	<title>Menu Cibo e Musica</title>
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+
+	<div class="Corpo">
+ 		&nbsp;
+		<table>
+			<tr th:each="prodotto : ${primi}">
+				<td>
+					<a  th:text="| &bull; ${prodotto.nome}|">Titolo</a>
+					<a  th:text="| ${prodotto.prezzo}|">Titolo</a>
+				</td>
+			</tr>
+	    </table>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>

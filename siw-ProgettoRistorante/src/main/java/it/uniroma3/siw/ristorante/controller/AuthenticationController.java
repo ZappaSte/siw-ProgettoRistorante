@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
-@SessionAttributes("accountCorrente")
+@SessionAttributes("ristoratoreCorrente")
 public class AuthenticationController {
 	
 	@RequestMapping(value = { "/", "/index" , "/index/**"}, method = RequestMethod.GET)
     public String index(Model model) {
-			model.addAttribute("accountCorrente", model.getAttribute("accountCorrente"));
+			model.addAttribute("ristoratoreCorrente", model.getAttribute("ristoratoreCorrente"));
 			return "index";
 		
     }	
