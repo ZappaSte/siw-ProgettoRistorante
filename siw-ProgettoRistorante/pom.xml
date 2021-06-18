@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.uniroma3.siw</groupId>
-	<artifactId>siw-progettoMuseo</artifactId>
+	<artifactId>siw-progettoRistorante</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>siw-progettoMuseo</name>
-	<description>progetto iniziale museo</description>
+	<name>siw-progettoRistorante</name>
+	<description>progetto iniziale ristorante</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

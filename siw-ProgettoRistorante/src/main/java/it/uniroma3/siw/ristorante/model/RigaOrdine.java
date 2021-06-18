@@ -1,10 +1,11 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.ristorante.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class RigaOrdine {
@@ -21,6 +22,9 @@ public class RigaOrdine {
 	public RigaOrdine(int quantita) {
 		this.quantita = quantita;
 	}
+	
+	@ManyToOne
+	private Ordine ordine;
 
 	/****************************************************************************************************/
 	/******************************************METODI GET E SET******************************************/
@@ -41,4 +45,14 @@ public class RigaOrdine {
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
+
+	public Ordine getOrdine() {
+		return ordine;
+	}
+
+	public void setOrdine(Ordine ordine) {
+		this.ordine = ordine;
+	}
+	
+	
 }
