@@ -1,10 +1,13 @@
 package it.uniroma3.siw.ristorante.model;
 
+
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 @Entity
 public class Prodotto {
@@ -29,14 +32,14 @@ public class Prodotto {
 	private String nome;
 	
 	@Column(nullable = false)
-	private Float prezzo;
+	private BigDecimal prezzo;
 	
 	private String descrizione;
 	
 	@Column(nullable = false)
 	private String categoria;
 	
-	public Prodotto(String nome, Float prezzo, String descrizione, String categoria) {
+	public Prodotto(String nome, BigDecimal prezzo, String descrizione, String categoria) {
 		this.nome = nome;
 		this.prezzo = prezzo;
 		this.descrizione = descrizione;	
@@ -68,11 +71,11 @@ public class Prodotto {
 		this.nome = nome;
 	}
 
-	public Float getPrezzo() {
+	public BigDecimal getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(Float prezzo) {
+	public void setPrezzo(BigDecimal prezzo) {
 		this.prezzo = prezzo;
 	}
 

@@ -1,5 +1,7 @@
 package it.uniroma3.siw.ristorante;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -37,31 +39,31 @@ public class DBpopulationRistorante implements ApplicationRunner{
 		
 		Prodotto p1 = new Prodotto();
 		p1.setNome("Carbonara");
-		p1.setPrezzo(7.5f);
+		p1.setPrezzo(new BigDecimal("7.5"));
 		p1.setDescrizione("Carbonara con guanciale, uovo, pecorino");
 		p1.setCategoria(Prodotto.PRIMO_CAT);
 		
 		Prodotto p2 = new Prodotto();
 		p2.setNome("Amatriciana");
-		p2.setPrezzo(7.5f);
+		p2.setPrezzo(new BigDecimal("7.5"));
 		p2.setDescrizione("Amatriciana con pomodoro, guanciale");
 		p2.setCategoria(Prodotto.PRIMO_CAT);
 		
 		
-		Prodotto p3 = new Prodotto("Spaghetti alle Vongole",9.5f, "Spaghetti con vongole fresche", Prodotto.PRIMO_CAT);
-		Prodotto p4 = new Prodotto("Risotto agli Scampi",9.5f, "Risotto con scampi freschi", Prodotto.PRIMO_CAT);
-		Prodotto p5 = new Prodotto("Scaloppine al Limone",12.0f, "Scaloppine di pollo al limone", Prodotto.SECONDO_CAT);
-		Prodotto p6 = new Prodotto("Bistecca di Manzo",18f, "Bistecca di manzo, taglio fiorentina", Prodotto.SECONDO_CAT);
-		Prodotto p7 = new Prodotto("Frittura di Mare",15f, "Frittura di pesce con calamari e moscardini", Prodotto.SECONDO_CAT);
-		Prodotto p8 = new Prodotto("Patate al Forno",7f, "Patate al forno con rosmarino", Prodotto.CONTORNO_CAT);
-		Prodotto p9 = new Prodotto("Cicoria Ripassata",5f, "Cicoria Ripassata con peperoncino", Prodotto.CONTORNO_CAT);
-		Prodotto p10 = new Prodotto("Insalata",5f, "Insalatya di lattuga, carote e finocchi", Prodotto.CONTORNO_CAT);
-		Prodotto p11 = new Prodotto("Polpo con patate", 12f, "Polpo con patate", Prodotto.SECONDO_CAT);
-		Prodotto p12 = new Prodotto("Coca Cola",2.5f, "1.5LT", Prodotto.BEVANDE_CAT);
-		Prodotto p13 = new Prodotto("Sprite",9.5f, "33cL", Prodotto.BEVANDE_CAT);
-		Prodotto p14 = new Prodotto("Vino Rosso",9.5f, "Vino rosso dei castelli", Prodotto.VINO_CAT);
-		Prodotto p15 = new Prodotto("Falanghina",9.5f, "Vino bianco, falanghina beneventana", Prodotto.VINO_CAT);
-	
+		Prodotto p3 = new Prodotto("Spaghetti alle Vongole",new BigDecimal("9.5"), "Spaghetti con vongole fresche", Prodotto.PRIMO_CAT);
+		Prodotto p4 = new Prodotto("Risotto agli Scampi",new BigDecimal("9.5"), "Risotto con scampi freschi", Prodotto.PRIMO_CAT);
+		Prodotto p5 = new Prodotto("Scaloppine al Limone",new BigDecimal("9.5"), "Scaloppine di pollo al limone", Prodotto.SECONDO_CAT);
+		Prodotto p6 = new Prodotto("Bistecca di Manzo",new BigDecimal("22"), "Bistecca di manzo, taglio fiorentina", Prodotto.SECONDO_CAT);
+		Prodotto p7 = new Prodotto("Frittura di Mare",new BigDecimal("15"), "Frittura di pesce con calamari e moscardini", Prodotto.SECONDO_CAT);
+		Prodotto p8 = new Prodotto("Patate al Forno",new BigDecimal("5"), "Patate al forno con rosmarino", Prodotto.CONTORNO_CAT);
+		Prodotto p9 = new Prodotto("Cicoria Ripassata",new BigDecimal("5"), "Cicoria Ripassata con peperoncino", Prodotto.CONTORNO_CAT);
+		Prodotto p10 = new Prodotto("Insalata",new BigDecimal("5"), "Insalatya di lattuga, carote e finocchi", Prodotto.CONTORNO_CAT);
+		Prodotto p11 = new Prodotto("Polpo con patate",new BigDecimal("12"), "Polpo con patate", Prodotto.SECONDO_CAT);
+		Prodotto p12 = new Prodotto("Coca Cola",new BigDecimal("4"), "1.5LT", Prodotto.BEVANDE_CAT);
+		Prodotto p13 = new Prodotto("Sprite",new BigDecimal("2"), "33cL", Prodotto.BEVANDE_CAT);
+		Prodotto p14 = new Prodotto("Vino Rosso",new BigDecimal("18"), "Vino rosso dei castelli", Prodotto.VINO_CAT);
+		Prodotto p15 = new Prodotto("Falanghina",new BigDecimal("18"), "Vino bianco, falanghina beneventana", Prodotto.VINO_CAT);
+		
 		
 		
 		prodottoRepository.save(p1);

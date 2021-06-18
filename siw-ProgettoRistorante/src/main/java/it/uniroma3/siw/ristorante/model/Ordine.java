@@ -1,5 +1,6 @@
 package it.uniroma3.siw.ristorante.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class Ordine {
 	@Column(nullable = false)
 	private LocalDateTime dataOrdine;
 	
-	private Float totaleOrdine;
+	private BigDecimal totaleOrdine;
 	
-	public Ordine(LocalDateTime dataOrdine, Float totaleOrdine) {
+	public Ordine(LocalDateTime dataOrdine, BigDecimal totaleOrdine) {
 		this.dataOrdine = dataOrdine;
 		this.totaleOrdine = totaleOrdine;
 	}
@@ -53,11 +54,11 @@ public class Ordine {
 		this.dataOrdine = dataOrdine;
 	}
 
-	public Float getTotaleOrdine() {
+	public BigDecimal getTotaleOrdine() {
 		return totaleOrdine;
 	}
 
-	public void setTotaleOrdine(Float totaleOrdine) {
+	public void setTotaleOrdine(BigDecimal totaleOrdine) {
 		this.totaleOrdine = totaleOrdine;
 	}
 

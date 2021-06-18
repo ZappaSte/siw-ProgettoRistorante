@@ -4,18 +4,22 @@
 </head>
 <body>
 	<div th:replace="fragments/base.html :: login"></div>
+	
 	<h4>Login</h4>
+	
+	<div th:replace="fragments/base.html :: navigator"></div>
+	
  	<div class="Corpo">
 		<form th:action="@{/login}" method="POST">
 			&nbsp;
 			<table>
 				<tr>
-					<td>Username:</td>
+					<td><b><i>Username:</i></b></td>
 					<td><input name="username" type="text" required /></td>
 				</tr>		
 				
 				<tr>
-					<td>Password:</td>
+					<td><b><i>Password:</i></b></td>
 					<td><input name="password" type="password" required /></td>
 				</tr>
 				<tr>
