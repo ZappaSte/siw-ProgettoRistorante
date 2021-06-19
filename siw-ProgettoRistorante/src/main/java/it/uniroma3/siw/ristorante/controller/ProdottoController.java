@@ -12,16 +12,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.thymeleaf.expression.Numbers;
+
+import it.uniroma3.siw.ristorante.model.Ordine;
 import it.uniroma3.siw.ristorante.model.Prodotto;
+import it.uniroma3.siw.ristorante.model.RigaOrdine;
 import it.uniroma3.siw.ristorante.service.ProdottoService;
+import it.uniroma3.siw.ristorante.service.RigaOrdineService;
 
 @Controller
 @SessionAttributes("ristoratoreCorrente")
 public class ProdottoController {
 
 	
-	private List<Prodotto> carrello = new ArrayList<>();
+	@Autowired
+	public RigaOrdineService rigaOrdineService;
 	
 	@Autowired
 	public ProdottoService prodottoService;
@@ -31,7 +38,9 @@ public class ProdottoController {
 	
 	@RequestMapping(value="/primi", method=RequestMethod.GET)
 	public String showPrimi(Model model) {
+		int quantita =  0;
 		List<Prodotto> primi = this.prodottoService.findAllPrimi();
+		model.addAttribute("quantita", quantita);
 		model.addAttribute("primi", primi);
 		return "primi";
 	}
@@ -90,104 +99,88 @@ public class ProdottoController {
     	/* Cancella la collezione dal db */
         this.prodottoService.rimuovi(prodotto.getId());
         /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
-        if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
-        	model.addAttribute("primi", prodottoService.findAllPrimi());
-        	return "redirect:/primi";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.SECONDO_CAT)) {
-        	model.addAttribute("secondi", prodottoService.findAllSecondi());
-        	return "redirect:/secondi";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.CONTORNO_CAT)) {
-        	model.addAttribute("contorni", prodottoService.findAllContorni());
-        	return "redirect:/contorni";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.PIZZA_CAT)) {
-        	model.addAttribute("pizze", prodottoService.findAllPizze());
-        	return "redirect:/pizze";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.DOLCE_CAT)) {
-        	model.addAttribute("dolci", prodottoService.findAllDolci());
-        	return "redirect:/dolci";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.VINO_CAT)) {
-        	model.addAttribute("vini", prodottoService.findAllVini());
-        	return "redirect:/vini";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.BEVANDE_CAT)) {
-        	model.addAttribute("bevande", prodottoService.findAllBevande());
-        	return "redirect:/bevande";
-        }
-        return "redirect:/index";
-    }
-    
-    
-    /************************MODIFICA PRODOTTO************************/
-    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.GET)
-    public String modificaCollezione(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("prodotto", this.prodottoService.findById(id));
-		return "admin/modificaProdotto";
-	}
-    
-    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.POST)
-    public String registerModificaProdotto(@PathVariable("id") Long id,@Validated @ModelAttribute("prodotto") Prodotto prodotto,
-    				Model model) {    	
-    	/*Aggiorna Modifiche Prodoto*/
-    	prodottoService.update(prodotto, id);            
-    	/* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
-        if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
-        	model.addAttribute("primi", prodottoService.findAllPrimi());
-        	return "redirect:/primi";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.SECONDO_CAT)) {
-        	model.addAttribute("secondi", prodottoService.findAllSecondi());
-        	return "redirect:/secondi";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.CONTORNO_CAT)) {
-        	model.addAttribute("contorni", prodottoService.findAllContorni());
-        	return "redirect:/contorni";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.PIZZA_CAT)) {
-        	model.addAttribute("pizze", prodottoService.findAllPizze());
-        	return "redirect:/pizze";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.DOLCE_CAT)) {
-        	model.addAttribute("dolci", prodottoService.findAllDolci());
-        	return "redirect:/dolci";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.VINO_CAT)) {
-        	model.addAttribute("vini", prodottoService.findAllVini());
-        	return "redirect:/vini";
-        }
-        else if(prodotto.getCategoria().equals(Prodotto.BEVANDE_CAT)) {
-        	model.addAttribute("bevande", prodottoService.findAllBevande());
-        	return "redirect:/bevande";
-        }
-        return "redirect:/index";
         
+       return this.decidiPagDaRit(prodotto, model);
     }
-    
-    
-    
-    
+
 	
-	
-	
-	
-	@RequestMapping(value ="/addProdottoCarrello/{id}", method=RequestMethod.POST)
-	public String addProdottoCarrello(@PathVariable("id") Long id, Model model) {
+	@RequestMapping(value ="/prodotto/{id}/addProdottoCarrello", method=RequestMethod.GET)
+	public String addProdottoCarrello(@PathVariable("id") Long id,
+			@RequestParam(value = "quantita") int quantita, Model model) {
 		if(id==null) {
 			return "error";
 		}
 		else {
-			Prodotto prodotto= prodottoService.findById(id);
+			Ordine ordine = null;
+			Prodotto prodotto = prodottoService.findById(id);
+			RigaOrdine rigaOrdine = new RigaOrdine();
 			if (session.getAttribute("carrello")==null){
-				session.setAttribute("carrello", carrello);
+				ordine = new Ordine();
+				session.setAttribute("carrello", ordine);
 			}
-
-			carrello.add(prodotto);
-			return "redirect:";
+			else {
+				 ordine = (Ordine) session.getAttribute("carrello");
+			}
+			rigaOrdine.setProdotto(prodotto);
+			rigaOrdine.setQuantita(quantita);
+			rigaOrdineService.save(rigaOrdine);
+			ordine.addRigaOrdine(rigaOrdine);
+			session.setAttribute("carrello", ordine);
+			
+			
+			return decidiPagDaRit(prodotto, model);
 		}
 	}
-
+	
+	@RequestMapping(value="/carrello", method=RequestMethod.GET)
+	public String showCarrello(Model model) {
+		Ordine ordine = (Ordine) session.getAttribute("carrello");
+		if(ordine.getRigheOrdine().size()!=0) {
+			List<RigaOrdine> righeOrdineNelCarrello = ordine.getRigheOrdine();
+			ordine.setTotaleOrdine(ordine.calcolaTotale());
+			model.addAttribute("carrelloDaMostrare", righeOrdineNelCarrello);
+			model.addAttribute("ordine", ordine);
+			session.setAttribute("carrello", ordine);
+			return "carrello";
+		}
+		return "index";   //da modificare
+		
+	}	
+	
+	
+	public String decidiPagDaRit(Prodotto prodotto,Model model) {
+		if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
+        	model.addAttribute("primi", prodottoService.findAllPrimi());
+        	return "redirect:/primi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.SECONDO_CAT)) {
+        	model.addAttribute("secondi", prodottoService.findAllSecondi());
+        	return "redirect:/secondi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.CONTORNO_CAT)) {
+        	model.addAttribute("contorni", prodottoService.findAllContorni());
+        	return "redirect:/contorni";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.PIZZA_CAT)) {
+        	model.addAttribute("pizze", prodottoService.findAllPizze());
+        	return "redirect:/pizze";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.DOLCE_CAT)) {
+        	model.addAttribute("dolci", prodottoService.findAllDolci());
+        	return "redirect:/dolci";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.VINO_CAT)) {
+        	model.addAttribute("vini", prodottoService.findAllVini());
+        	return "redirect:/vini";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.BEVANDE_CAT)) {
+        	model.addAttribute("bevande", prodottoService.findAllBevande());
+        	return "redirect:/bevande";
+        }
+        return "redirect:/index";
+    }
+    
+    
+   
+    
 }

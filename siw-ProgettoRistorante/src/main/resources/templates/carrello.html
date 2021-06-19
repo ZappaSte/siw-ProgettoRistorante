@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+	<link th:href="@{/css/my-style.css}" rel="stylesheet">
+	<title>Carrello</title>
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	
+	<div th:replace="fragments/base.html :: logo"></div>
+
+	<h4>Primi Piatti</h4>
+
+	<div th:replace="fragments/base.html :: navigator"></div>
+	
+	<div class="Corpo">
+ 		&nbsp;
+		<table class="Prodotto" th:each="rigaOrdine : ${carrelloDaMostrare}">
+			<tr>
+				<td style="width: 400px">
+					<b><a  th:text="${rigaOrdine.prodotto.nome}">Nome</a></b>
+				</td>	
+				<td style="width: 400px">
+					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
+				</td>
+							
+				
+			</tr>
+			
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		<form style="width: 400px">
+					<b><a  th:text="${ordine.totaleOrdine}">Nome</a></b>
+		</form>
+		<form th:action="@{/confermaOrdine}"
+					      th:method="GET">
+					      <button type="submit">Conferma Ordine</button>
+					</form>	
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>
+
+
+
+
+
+<!-- 
+<span th:if="${ristoratoreCorrente != null}">
+				<td>
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
+				          th:method="GET">
+				          <button type="submit">Modifica</button>
+					</form>				
+				</td>
+				<td>	
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+				          th:method="GET">
+				          <button type="submit">Elimina</button>
+					</form>	
+				</td>				
+			</span>	
+
+ -->

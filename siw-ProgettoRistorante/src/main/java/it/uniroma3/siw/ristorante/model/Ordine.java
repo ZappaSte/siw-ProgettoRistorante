@@ -2,6 +2,7 @@ package it.uniroma3.siw.ristorante.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,6 +32,11 @@ public class Ordine {
 		this.totaleOrdine = totaleOrdine;
 	}
 	
+	public Ordine() {
+		this.righeOrdine = new ArrayList<>();
+		this.totaleOrdine = new BigDecimal("0");
+	}
+
 	@OneToMany(mappedBy ="ordine", cascade= {CascadeType.ALL})
 	private List<RigaOrdine> righeOrdine;
 
@@ -70,6 +76,23 @@ public class Ordine {
 		this.righeOrdine = righeOrdine;
 	}
 	
+	public void addRigaOrdine(RigaOrdine rigaOrdine) {
+		this.righeOrdine.add(rigaOrdine);
+	}
+	
+	public BigDecimal calcolaTotale() {
+		for(RigaOrdine rigaOrdine : righeOrdine) {
+			totaleOrdine.add(rigaOrdine.getProdotto().getPrezzo().multiply(new BigDecimal(rigaOrdine.getQuantita())));
+		}
+		
+		return totaleOrdine;
+	}
+	
+	/*public List<Prodotto> prodottiNellOrdine(){
+		for(RigaOrdine rigaOrdine : this.righeOrdine) {
+			
+		}
+	}*/
 	
 
 }

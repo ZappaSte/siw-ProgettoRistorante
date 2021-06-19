@@ -21,13 +21,12 @@
 					<b><a  th:text="${prodotto.nome}">Nome</a></b>
 				</td>
 				<td>
-					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>
-				</td>	
-				<td th:if="${ristoratoreCorrente == null}">	
-					<input style="width: 40px" type="number" value="1" />		
+					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>	
+							
 				</td>
-				<td th:if="${ristoratoreCorrente == null}">	
-					<form th:href="@{admin/addCarello}" th:action="@{admin/addCarello}"
+				<td>
+						<input name = "quantita" style="width: 40px" th:type="int" th:value="${quantita}"/>
+					<form th:action="@{'/prodotto' + '/' + ${prodotto.id} +  '/' + 'addProdottoCarrello'}"
 					      th:method="GET">
 					      <button type="submit">&#128722;</button>
 					</form>

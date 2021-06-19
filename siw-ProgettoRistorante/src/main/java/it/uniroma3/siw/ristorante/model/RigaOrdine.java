@@ -19,12 +19,28 @@ public class RigaOrdine {
 	@Column(nullable = false)
 	private int quantita;
 
+	
+	@ManyToOne
+	private Ordine ordine;
+	
+	@ManyToOne
+	private Prodotto prodotto;
+	
+	
+
+	public RigaOrdine(int quantita, Prodotto prodotto) {
+		this.quantita = quantita;
+		this.prodotto = prodotto;
+	}
+	
 	public RigaOrdine(int quantita) {
 		this.quantita = quantita;
 	}
 	
-	@ManyToOne
-	private Ordine ordine;
+
+	public RigaOrdine() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/****************************************************************************************************/
 	/******************************************METODI GET E SET******************************************/
@@ -53,6 +69,16 @@ public class RigaOrdine {
 	public void setOrdine(Ordine ordine) {
 		this.ordine = ordine;
 	}
+
+	public Prodotto getProdotto() {
+		return prodotto;
+	}
+
+	public void setProdotto(Prodotto prodotto) {
+		this.prodotto = prodotto;
+	}
+	
+	
 	
 	
 }

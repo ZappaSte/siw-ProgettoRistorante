@@ -2,11 +2,15 @@ package it.uniroma3.siw.ristorante.model;
 
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -38,6 +42,9 @@ public class Prodotto {
 	
 	@Column(nullable = false)
 	private String categoria;
+	
+	@OneToMany(mappedBy ="prodotto", cascade= {CascadeType.ALL})
+	private List<RigaOrdine> righeOrdine;
 	
 	public Prodotto(String nome, BigDecimal prezzo, String descrizione, String categoria) {
 		this.nome = nome;
