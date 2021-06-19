@@ -47,6 +47,12 @@ public class ProdottoService {
 	public void rimuovi(Long id) {
 		prodottoRepository.rimuoviProdottoById(id);		
 	}
+	
+	@Transactional
+	public void update(Prodotto prodotto, Long id) {
+		prodottoRepository.saveOrUpdateProdotto(prodotto.getNome(),prodotto.getPrezzo(),
+				prodotto.getDescrizione(),prodotto.getCategoria(), id);
+	}
 
 	@Transactional
 	public List<Prodotto> findAllPrimi() {

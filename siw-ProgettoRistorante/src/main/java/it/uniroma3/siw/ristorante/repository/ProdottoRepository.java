@@ -1,5 +1,6 @@
 package it.uniroma3.siw.ristorante.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,9 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	@Query("DELETE FROM Prodotto p WHERE p.id = ?1")
 	@Modifying
 	public int rimuoviProdottoById(Long idProdotto);
+	
+	@Query("UPDATE Prodotto SET nome = ?1, prezzo = ?2, descrizione = ?3, categoria = ?4 WHERE id = ?5")
+	@Modifying
+	public void saveOrUpdateProdotto(String titolo, BigDecimal prezzo, String descrizione, String categoria,Long id);
 	
 }

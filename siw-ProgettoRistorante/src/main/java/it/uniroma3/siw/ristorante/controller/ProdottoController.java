@@ -7,11 +7,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import it.uniroma3.siw.ristorante.model.Prodotto;
 import it.uniroma3.siw.ristorante.service.ProdottoService;
 
@@ -75,14 +76,14 @@ public class ProdottoController {
 		List<Prodotto> bevande = this.prodottoService.findAllBevande();
 		model.addAttribute("bevande", bevande);
 		return "bevande";
-	}
-		
+	}	
+	
+	/************************ELIMINAZIONE PRODOTTO************************/
 	@RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.GET)
     public String eliminaProdotto(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("prodotto", this.prodottoService.findById(id));
 		return "admin/eliminaProdotto";		
-    }
-    
+    }    
     @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
     public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
     	Prodotto prodotto = prodottoService.findById(id);
@@ -120,6 +121,51 @@ public class ProdottoController {
         return "redirect:/index";
     }
     
+    
+    /************************MODIFICA PRODOTTO************************/
+    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.GET)
+    public String modificaCollezione(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("prodotto", this.prodottoService.findById(id));
+		return "admin/modificaProdotto";
+	}
+    
+    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.POST)
+    public String registerModificaProdotto(@PathVariable("id") Long id,@Validated @ModelAttribute("prodotto") Prodotto prodotto,
+    				Model model) {    	
+    	/*Aggiorna Modifiche Prodoto*/
+    	prodottoService.update(prodotto, id);            
+    	/* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+        if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
+        	model.addAttribute("primi", prodottoService.findAllPrimi());
+        	return "redirect:/primi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.SECONDO_CAT)) {
+        	model.addAttribute("secondi", prodottoService.findAllSecondi());
+        	return "redirect:/secondi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.CONTORNO_CAT)) {
+        	model.addAttribute("contorni", prodottoService.findAllContorni());
+        	return "redirect:/contorni";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.PIZZA_CAT)) {
+        	model.addAttribute("pizze", prodottoService.findAllPizze());
+        	return "redirect:/pizze";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.DOLCE_CAT)) {
+        	model.addAttribute("dolci", prodottoService.findAllDolci());
+        	return "redirect:/dolci";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.VINO_CAT)) {
+        	model.addAttribute("vini", prodottoService.findAllVini());
+        	return "redirect:/vini";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.BEVANDE_CAT)) {
+        	model.addAttribute("bevande", prodottoService.findAllBevande());
+        	return "redirect:/bevande";
+        }
+        return "redirect:/index";
+        
+    }
     
     
     

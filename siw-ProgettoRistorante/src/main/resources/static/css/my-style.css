@@ -85,7 +85,7 @@ li a:hover {
   text-decoration: none;
 }*/
 
-button{
+button, .button{
 	border-radius: 10px 10px 10px 10px;
 }
 

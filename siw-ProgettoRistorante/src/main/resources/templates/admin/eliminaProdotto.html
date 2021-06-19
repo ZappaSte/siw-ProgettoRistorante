@@ -4,7 +4,11 @@
 </head>
 <body>
 	<div th:replace="fragments/base.html :: login"></div>
+	
+	<div th:replace="fragments/base.html :: logo"></div>
+	
 	<h4>Eleminazione Prodotto</h4>
+	
 	<div th:replace="fragments/base.html :: navigator"></div>
  	<div class="Corpo">
  		<table></table>
@@ -14,10 +18,11 @@
 	    <form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
 			  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
 			  th:method="POST">
-			  <button type="submit">Elimina</button>
+			  <button type="submit">Elimina</button>			  
+			  <input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
 		</form>
 			   
-		<input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+		
 	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>

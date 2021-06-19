@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles"> 
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	<h4>Modifica Prodotto</h4>
+	
+	<div th:replace="fragments/base.html :: navigator"></div>
+	<div class="Corpo"> 			
+		<form th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}" method="POST">
+			<table>
+				<tr>
+		            <td>Nome Prodotto</td>
+		            <td><input style="width: 300px" type="text" placeholder="anno" required
+		                       th:field="${prodotto.nome}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Prezzo</td>
+		            <td><input style="width: 60px"  type="number" placeholder="prezzo" required
+		                       th:field="${prodotto.prezzo}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Descrizione</td>		        
+		            <td><input style="width: 300px" type="text" placeholder="descrizione"
+		                       th:field="${prodotto.descrizione}"/></td>
+		        </tr>
+		        <tr>
+		            <td>Categoria</td>
+		            <td><input style="width: 100px" type="text" placeholder="categoria"
+		                       th:field="${prodotto.categoria}"/>PRIMO,SECONDO,CONTORNO,PIZZA,DOLCE,VINO,BEVANDA</td>
+		                       
+		        </tr>
+				<tr>
+		            <td>
+		                <button type="submit">Conferma Modifica</button>
+		                <input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+		            </td>
+		        </tr>
+	    	</table>
+		</form>
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>
