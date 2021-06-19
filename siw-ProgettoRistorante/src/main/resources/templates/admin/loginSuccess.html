@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles">
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	
+	<div th:replace="fragments/base.html :: logo"></div>
+	
+	<h4>Login</h4>
+	
+	<div th:replace="fragments/base.html :: navigator"></div>
+	
+ 	<div class="Corpo">
+		<form th:action="@{/loginSuccess}" method="POST">
+			&nbsp;
+			<table>
+				<tr>
+					<td><button type="submit">Aggiungi nuovo prodotto</button></td>
+				</tr>		
+				
+				<tr>
+					<td><button type="submit">Visulizza ordini</button></td>
+				</tr>			
+			</table>
+			&nbsp;
+		</form>
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>

@@ -39,7 +39,7 @@ public class AuthenticationController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/default", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginSuccess", method = RequestMethod.GET)
 	public String defaultAfterLogin(Model model) {
 
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -48,7 +48,7 @@ public class AuthenticationController {
 			model.addAttribute("ristoratoreCorrente", credentials);
 		}
 		if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-			return "index";
+			return "admin/loginSuccess";
 		}
 		return "index";
 	}
