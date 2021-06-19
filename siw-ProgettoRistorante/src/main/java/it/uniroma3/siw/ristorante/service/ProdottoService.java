@@ -42,6 +42,11 @@ public class ProdottoService {
 	public Object findAll() {
 		return prodottoRepository.findAll();
 	}
+	
+	@Transactional
+	public void rimuovi(Long id) {
+		prodottoRepository.rimuoviProdottoById(id);		
+	}
 
 	@Transactional
 	public List<Prodotto> findAllPrimi() {

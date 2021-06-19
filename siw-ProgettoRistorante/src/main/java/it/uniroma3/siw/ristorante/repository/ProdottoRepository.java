@@ -3,6 +3,7 @@ package it.uniroma3.siw.ristorante.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -20,7 +21,6 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 
 	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'SECONDO'")
 	public List<Long> findAllSecondi();
-
 	
 	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'CONTORNO'")
 	public List<Long> findAllContorni();
@@ -36,5 +36,9 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	
 	@Query("SELECT id FROM Prodotto WHERE Categoria  = 'BEVANDE'")
 	public List<Long> findAllBevande();
+	
+	@Query("DELETE FROM Prodotto p WHERE p.id = ?1")
+	@Modifying
+	public int rimuoviProdottoById(Long idProdotto);
 	
 }

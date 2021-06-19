@@ -24,7 +24,7 @@ public class ProdottoController {
 	
 	@Autowired
 	public ProdottoService prodottoService;
-	
+		
 	@Autowired
 	private HttpSession session;
 	
@@ -76,6 +76,55 @@ public class ProdottoController {
 		model.addAttribute("bevande", bevande);
 		return "bevande";
 	}
+		
+	@RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.GET)
+    public String eliminaProdotto(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("prodotto", this.prodottoService.findById(id));
+		return "admin/eliminaProdotto";		
+    }
+    
+    @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
+    public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
+    	Prodotto prodotto = prodottoService.findById(id);
+    	/* Cancella la collezione dal db */
+        this.prodottoService.rimuovi(prodotto.getId());
+        /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+        if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
+        	model.addAttribute("primi", prodottoService.findAllPrimi());
+        	return "redirect:/primi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.SECONDO_CAT)) {
+        	model.addAttribute("secondi", prodottoService.findAllSecondi());
+        	return "redirect:/secondi";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.CONTORNO_CAT)) {
+        	model.addAttribute("contorni", prodottoService.findAllContorni());
+        	return "redirect:/contorni";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.PIZZA_CAT)) {
+        	model.addAttribute("pizze", prodottoService.findAllPizze());
+        	return "redirect:/pizze";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.DOLCE_CAT)) {
+        	model.addAttribute("dolci", prodottoService.findAllDolci());
+        	return "redirect:/dolci";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.VINO_CAT)) {
+        	model.addAttribute("vini", prodottoService.findAllVini());
+        	return "redirect:/vini";
+        }
+        else if(prodotto.getCategoria().equals(Prodotto.BEVANDE_CAT)) {
+        	model.addAttribute("bevande", prodottoService.findAllBevande());
+        	return "redirect:/bevande";
+        }
+        return "redirect:/index";
+    }
+    
+    
+    
+    
+    
+	
 	
 	
 	

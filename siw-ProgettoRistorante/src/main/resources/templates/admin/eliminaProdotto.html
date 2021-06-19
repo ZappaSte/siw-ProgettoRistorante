@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles">
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	<h4>Eleminazione Prodotto</h4>
+	<div th:replace="fragments/base.html :: navigator"></div>
+ 	<div class="Corpo">
+ 		<table></table>
+ 		<h1>
+ 			<a th:text="|Sicuro di voler eliminare il Prodotto '${prodotto.nome}' ?|"></a>
+	    </h1>
+	    <form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+			  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+			  th:method="POST">
+			  <button type="submit">Elimina</button>
+		</form>
+			   
+		<input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>
