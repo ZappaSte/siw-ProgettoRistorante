@@ -24,7 +24,7 @@
 					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
 				</td>
 				<td style="width: 400px">
-					<b><a  th:text="${rigaOrdine.subTotale}">Quantita</a></b>
+					<i><a  th:text="|${rigaOrdine.subTotale} &euro;|">Quantita</a></i>
 				</td>
 			</tr>
 			
@@ -33,7 +33,7 @@
 			</tr>
 		</table>
 		<form style="width: 400px">
-					<b><a  th:text="${ordine.totaleOrdine}">Nome</a></b>
+					<i><a  th:text="|${ordine.totaleOrdine} &euro;|">Totale</a></i>
 		</form>
 		<form th:action="@{/confermaOrdine}"
 					      th:method="GET">
