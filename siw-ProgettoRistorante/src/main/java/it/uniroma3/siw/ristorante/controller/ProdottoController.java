@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,73 +97,11 @@ public class ProdottoController {
 		List<Prodotto> bevande = this.prodottoService.findAllBevande();
 		model.addAttribute("bevande", bevande);
 		return "bevande";
-	}	
-	
-	/************************ELIMINAZIONE PRODOTTO************************/
-	@RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.GET)
-    public String eliminaProdotto(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("prodotto", this.prodottoService.findById(id));
-		return "admin/eliminaProdotto";		
-    }    
-    @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
-    public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
-    	Prodotto prodotto = prodottoService.findById(id);
-    	/* Cancella la collezione dal db */
-        this.prodottoService.rimuovi(prodotto.getId());
-        /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
-        
-       return this.decidiPagDaRit(prodotto, model);
-    }
-
-    /************************AGGIUNTA PRODOTTO AL CARRELLO************************/
-	@RequestMapping(value ="/prodotto/{id}/addProdottoCarrello", method=RequestMethod.POST)
-	public String addProdottoCarrello(@PathVariable("id") Long id,
-			@RequestParam(value = "quant") int quantita, Model model) {
-		if(id==null) {
-			return "error";
-		}
-		else {
-			Ordine ordine = null;
-			Prodotto prodotto = prodottoService.findById(id);
-			RigaOrdine rigaOrdine = new RigaOrdine();
-			if (session.getAttribute("carrello")==null){
-				ordine = new Ordine();
-				session.setAttribute("carrello", ordine);
-			}
-			else {
-				 ordine = (Ordine) session.getAttribute("carrello");
-			}
-			rigaOrdine.setProdotto(prodotto);
-			rigaOrdine.setQuantita(quantita);
-			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
-			rigaOrdineService.save(rigaOrdine);
-			ordine.addRigaOrdine(rigaOrdine);
-			session.setAttribute("carrello", ordine);
-			
-			
-			return decidiPagDaRit(prodotto, model);
-		}
 	}
 	
-	/************************MOSTRA CARRELLO************************/
-	@RequestMapping(value="/carrello", method=RequestMethod.GET)
-	public String showCarrello(Model model) {
-		if(session.getAttribute("carrello")==null) {
-			return "carrelloVuoto";
-		}
-		else {
-			Ordine ordine = (Ordine) session.getAttribute("carrello");
-			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
-			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
-			model.addAttribute("ordine", ordine);
-			//session.setAttribute("carrello", ordine);
-			return "carrello";
-		}
-		
-		
-	}	
 	
 	
+	/*Sceglie quale pagina del menu visualizzare */
 	public String decidiPagDaRit(Prodotto prodotto,Model model) {
 		if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
         	model.addAttribute("primi", prodottoService.findAllPrimi());
@@ -193,6 +133,106 @@ public class ProdottoController {
         }
         return "redirect:/index";
     }
+	
+	
+	
+	/************************ELIMINAZIONE PRODOTTO************************/
+	@RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.GET)
+    public String eliminaProdotto(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("prodotto", this.prodottoService.findById(id));
+		return "admin/eliminaProdotto";		
+    }    
+    @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
+    public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
+    	Prodotto prodotto = prodottoService.findById(id);
+    	/* Cancella la collezione dal db */
+        this.prodottoService.rimuovi(prodotto.getId());
+        /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+        
+       return this.decidiPagDaRit(prodotto, model);
+    }
+    
+    
+    
+    /************************MODIFICA PRODOTTO************************/
+    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.GET)
+    public String modificaCollezione(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("prodotto", this.prodottoService.findById(id));
+		return "admin/modificaProdotto";
+    }
+    
+    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.POST)
+    public String registerModificaProdotto(@PathVariable("id") Long id,@Validated @ModelAttribute("prodotto") Prodotto prodotto,
+    				Model model) {    	
+    	/*Aggiorna Modifiche Prodoto*/
+    	prodottoService.update(prodotto, id);            
+    	/* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+    	return this.decidiPagDaRit(prodotto, model);
+    }
+	
+    
+    
+    /************************AGGIUNTA PRODOTTO AL CARRELLO************************/
+	@RequestMapping(value ="/prodotto/{id}/addProdottoCarrello", method=RequestMethod.POST)
+	public String addProdottoCarrello(@PathVariable("id") Long id,
+			@RequestParam(value = "quant") int quantita, Model model) {
+		if(id==null) {
+			return "error";
+		}
+		else {
+			Ordine ordine = null;
+			Prodotto prodotto = prodottoService.findById(id);
+			RigaOrdine rigaOrdine = new RigaOrdine();
+			if (session.getAttribute("carrello")==null){
+				ordine = new Ordine();
+				session.setAttribute("carrello", ordine);
+			}
+			else {
+				 ordine = (Ordine) session.getAttribute("carrello");
+			}
+			rigaOrdine.setProdotto(prodotto);
+			rigaOrdine.setQuantita(quantita);
+			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
+			rigaOrdineService.save(rigaOrdine);
+			ordine.addRigaOrdine(rigaOrdine);
+			session.setAttribute("carrello", ordine);
+			
+			
+			return decidiPagDaRit(prodotto, model);
+		}
+	}
+	
+	
+	
+	
+	/************************MOSTRA CARRELLO************************/
+	@RequestMapping(value="/carrello", method=RequestMethod.GET)
+	public String showCarrello(Model model) {
+		if(session.getAttribute("carrello")==null) {
+			return "carrelloVuoto";
+		}
+		else {
+			Ordine ordine = (Ordine) session.getAttribute("carrello");
+			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
+			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
+			model.addAttribute("ordine", ordine);
+			//session.setAttribute("carrello", ordine);
+			return "carrello";
+		}
+		
+		
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public List<Integer> addInteger(){
 		List<Integer> daRit = new ArrayList<>();
