@@ -1,6 +1,7 @@
 package it.uniroma3.siw.ristorante.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import it.uniroma3.siw.ristorante.model.Ordine;
 import it.uniroma3.siw.ristorante.model.Prodotto;
 import it.uniroma3.siw.ristorante.model.RigaOrdine;
+import it.uniroma3.siw.ristorante.service.OrdineService;
 import it.uniroma3.siw.ristorante.service.ProdottoService;
 import it.uniroma3.siw.ristorante.service.RigaOrdineService;
 
@@ -32,6 +34,9 @@ public class ProdottoController {
 	
 	@Autowired
 	public ProdottoService prodottoService;
+	
+	@Autowired
+	public OrdineService ordineService;
 		
 	@Autowired
 	private HttpSession session;
@@ -193,7 +198,8 @@ public class ProdottoController {
 			rigaOrdine.setProdotto(prodotto);
 			rigaOrdine.setQuantita(quantita);
 			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
-			rigaOrdineService.save(rigaOrdine);
+			rigaOrdine.setOrdine(ordine);
+			//rigaOrdineService.save(rigaOrdine);
 			ordine.addRigaOrdine(rigaOrdine);
 			session.setAttribute("carrello", ordine);
 			
@@ -208,6 +214,8 @@ public class ProdottoController {
 	/************************MOSTRA CARRELLO************************/
 	@RequestMapping(value="/carrello", method=RequestMethod.GET)
 	public String showCarrello(Model model) {
+		List<Integer> numTavoli = addInteger();
+		model.addAttribute("numTavoli", numTavoli);
 		if(session.getAttribute("carrello")==null) {
 			return "carrelloVuoto";
 		}
@@ -216,13 +224,26 @@ public class ProdottoController {
 			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
 			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
 			model.addAttribute("ordine", ordine);
-			//session.setAttribute("carrello", ordine);
+			session.setAttribute("carrello", ordine);
 			return "carrello";
 		}
 		
 		
 	}	
 	
+	/************************CONFERMA ORDINE************************/
+	@RequestMapping(value="/confermaOrdine", method=RequestMethod.POST)
+	public String confermaOrdine(Model model, @RequestParam("numTavolo") int numTavolo) {
+		Ordine ordine = (Ordine) session.getAttribute("carrello");
+		ordine.setDataOrdine(LocalDateTime.now());
+		ordine.setNumTavolo(numTavolo);
+		ordineService.save(ordine);
+		model.addAttribute("ordineSuccess", ordine);
+		model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
+		model.addAttribute("ordine", ordine);
+		session.invalidate();
+		return "carrello";
+	}
 	
 	
 	
@@ -253,8 +274,5 @@ public class ProdottoController {
 		}
 		return totale;
 	}
-	
-    
-   
-    
+	 
 }

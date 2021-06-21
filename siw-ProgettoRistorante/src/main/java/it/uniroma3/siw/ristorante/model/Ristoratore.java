@@ -1,5 +1,6 @@
 package it.uniroma3.siw.ristorante.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,16 +27,21 @@ public class Ristoratore {
 
 	@Column(nullable = false)
 	private String telefono;
+	
+	@Column
+	private int numTavoli;
 
 	public Ristoratore(String nome, String cognome, String email, String telefono) {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
-		this.telefono = telefono;		
+		this.telefono = telefono;
+		this.numTavoli = 10;
 	}
 
 	public Ristoratore() {
 		// TODO Auto-generated constructor stub
+		this.numTavoli = 10;
 	}
 
 	/****************************************************************************************************/
@@ -81,5 +87,15 @@ public class Ristoratore {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+	public int getNumTavoli() {
+		return numTavoli;
+	}
+
+	public void setNumTavoli(int numTavoli) {
+		this.numTavoli = numTavoli;
+	}
+	
+	
 
 }

@@ -35,10 +35,25 @@
 		<form style="width: 400px">
 					<i><a  th:text="|${ordine.totaleOrdine} &euro;|">Totale</a></i>
 		</form>
-		<form th:action="@{/confermaOrdine}"
-					      th:method="GET">
+		
+		<form   th:if="${ordineSuccess == null}"
+				th:action="@{/confermaOrdine}"
+					      th:method="POST">
+					      <b>Seleziona Tavolo:</b>
+					      <select name="numTavolo" th:value = "${numTavolo}" size="1">
+		            		<option th:each = "numTavolo : ${numTavoli}"
+		            				th:text = "|${numTavolo}|"
+		            				th:value = "${numTavolo}">Numero</option>
+		            	</select>
 					      <button type="submit">Conferma Ordine</button>
-					</form>	
+		</form>
+		
+		<form   th:if="${ordineSuccess != null}"><b>Ordine Confermato</b><br>
+				<b>Orario Ordine:</b>
+				<i><a  th:text="|${ordine.dataOrdine}|">Totale</a></i><br>
+				<b>Sei al Tavolo:</b>
+				<i><a  th:text="|${ordine.numTavolo}|">Numero Tavolo</a></i>
+		</form>		
 	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>

@@ -27,6 +27,8 @@ public class Ordine {
 	
 	private BigDecimal totaleOrdine;
 	
+	private int numTavolo;
+	
 	public Ordine(LocalDateTime dataOrdine, BigDecimal totaleOrdine) {
 		this.dataOrdine = dataOrdine;
 		this.totaleOrdine = totaleOrdine;
@@ -72,6 +74,14 @@ public class Ordine {
 		return righeOrdine;
 	}
 
+	public int getNumTavolo() {
+		return numTavolo;
+	}
+
+	public void setNumTavolo(int numTavolo) {
+		this.numTavolo = numTavolo;
+	}
+
 	public void setRigheOrdine(List<RigaOrdine> righeOrdine) {
 		for(RigaOrdine rigaOrdine : righeOrdine) {
 			rigaOrdine.calcolaSubTotale();
@@ -82,6 +92,7 @@ public class Ordine {
 	public void addRigaOrdine(RigaOrdine rigaOrdine) {
 		this.righeOrdine.add(rigaOrdine);
 	}
+	
 	
 	
 	
