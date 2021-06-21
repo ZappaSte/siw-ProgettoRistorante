@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import it.uniroma3.siw.ristorante.model.RigaOrdine;
 import it.uniroma3.siw.ristorante.service.OrdineService;
 import it.uniroma3.siw.ristorante.service.ProdottoService;
 import it.uniroma3.siw.ristorante.service.RigaOrdineService;
+import it.uniroma3.siw.ristorante.validator.ProdottoValidator;
 
 @Controller
 @SessionAttributes("ristoratoreCorrente")
@@ -36,11 +38,18 @@ public class ProdottoController {
 	public ProdottoService prodottoService;
 	
 	@Autowired
+<<<<<<< Updated upstream
 	public OrdineService ordineService;
+=======
+	public ProdottoValidator prodottoValidator;
+>>>>>>> Stashed changes
 		
 	@Autowired
 	private HttpSession session;
 	
+	
+	/************************VISUALIZZA LE PAGINE DEL MENU************************/
+	/*PRIMI*/
 	@RequestMapping(value="/primi", method=RequestMethod.GET)
 	public String showPrimi(Model model) {
 		List<Integer> quantita = addInteger();
@@ -49,7 +58,7 @@ public class ProdottoController {
 		model.addAttribute("primi", primi);
 		return "primi";
 	}
-	
+	/*SECONDI*/
 	@RequestMapping(value="/secondi", method=RequestMethod.GET)
 	public String showSecondi(Model model) {
 		List<Integer> quantita = addInteger();
@@ -58,7 +67,7 @@ public class ProdottoController {
 		model.addAttribute("secondi", secondi);
 		return "secondi";
 	}
-	
+	/*CONTORNI*/
 	@RequestMapping(value="/contorni", method=RequestMethod.GET)
 	public String showContorni(Model model) {
 		List<Integer> quantita = addInteger();
@@ -67,7 +76,7 @@ public class ProdottoController {
 		model.addAttribute("contorni", contorni);
 		return "contorni";
 	}
-	
+	/*PIZZE*/
 	@RequestMapping(value="/pizze", method=RequestMethod.GET)
 	public String showPizze(Model model) {
 		List<Integer> quantita = addInteger();
@@ -76,7 +85,7 @@ public class ProdottoController {
 		model.addAttribute("pizze", pizze);
 		return "pizze";
 	}
-	
+	/*DOLCI*/
 	@RequestMapping(value="/dolci", method=RequestMethod.GET)
 	public String showDolci(Model model) {
 		List<Integer> quantita = addInteger();
@@ -85,7 +94,7 @@ public class ProdottoController {
 		model.addAttribute("dolci", dolci);
 		return "dolci";
 	}
-	
+	/*LISTA DEI VINI*/
 	@RequestMapping(value="/vini", method=RequestMethod.GET)
 	public String showVini(Model model) {
 		List<Integer> quantita = addInteger();
@@ -94,7 +103,7 @@ public class ProdottoController {
 		model.addAttribute("vini", vini);
 		return "vini";
 	}
-	
+	/*BEVANDE*/
 	@RequestMapping(value="/bevande", method=RequestMethod.GET)
 	public String showBevande(Model model) {
 		List<Integer> quantita = addInteger();
@@ -106,7 +115,7 @@ public class ProdottoController {
 	
 	
 	
-	/*Sceglie quale pagina del menu visualizzare */
+	/************************METODO PER VISUALIZZARE LE PAGINE DEL MENU************************/
 	public String decidiPagDaRit(Prodotto prodotto,Model model) {
 		if(prodotto.getCategoria().equals(Prodotto.PRIMO_CAT)) {
         	model.addAttribute("primi", prodottoService.findAllPrimi());
@@ -147,12 +156,13 @@ public class ProdottoController {
 		model.addAttribute("prodotto", this.prodottoService.findById(id));
 		return "admin/eliminaProdotto";		
     }    
+	
     @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
     public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
     	Prodotto prodotto = prodottoService.findById(id);
     	/* Cancella la collezione dal db */
         this.prodottoService.rimuovi(prodotto.getId());
-        /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+        /* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina del menu del prodotto */
         
        return this.decidiPagDaRit(prodotto, model);
     }
@@ -171,9 +181,34 @@ public class ProdottoController {
     				Model model) {    	
     	/*Aggiorna Modifiche Prodoto*/
     	prodottoService.update(prodotto, id);            
-    	/* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina di Admin */
+    	/* Se l'inserimento dei dati nella form è corretto, ritorna alla pagina del menu del prodotto */
     	return this.decidiPagDaRit(prodotto, model);
     }
+    
+    
+    
+    /************************AGGIUNTA DI UN NUOVO PRODOTTO************************/
+    @RequestMapping(value = "/admin/prodottoForm", method = RequestMethod.GET)
+	public String adminAggiungeProdotto(Model model) {
+		model.addAttribute("prodotto", new Prodotto());
+		return "admin/prodottoForm";
+	}
+	
+	@RequestMapping(value = { "/admin/prodottoForm" }, method = RequestMethod.POST)
+	public String registerProdotto(@ModelAttribute("prodotto") Prodotto prodotto,
+								Model model,BindingResult bindingResult){
+		/*Controlla se il prodotto è già presente nel menu*/
+		this.prodottoValidator.validate(prodotto, bindingResult);
+		/*Se non ci sono erroti*/
+		if(!bindingResult.hasErrors()) {
+			this.prodottoService.inserisci(prodotto);
+			model.addAttribute("artisti", this.prodottoService.findAll());
+			/* Se l'inserimento dei dati è corretto, ritorna alla pagina del menu del prodotto */
+	    	return this.decidiPagDaRit(prodotto, model);
+		}
+		return "admin/artistaForm";
+	}
+    
 	
     
     
@@ -226,10 +261,9 @@ public class ProdottoController {
 			model.addAttribute("ordine", ordine);
 			session.setAttribute("carrello", ordine);
 			return "carrello";
-		}
-		
-		
+		}		
 	}	
+<<<<<<< Updated upstream
 	
 	/************************CONFERMA ORDINE************************/
 	@RequestMapping(value="/confermaOrdine", method=RequestMethod.POST)
@@ -255,6 +289,9 @@ public class ProdottoController {
 	
 	
 	
+=======
+		
+>>>>>>> Stashed changes
 	public List<Integer> addInteger(){
 		List<Integer> daRit = new ArrayList<>();
 		Integer i=0;
@@ -265,14 +302,17 @@ public class ProdottoController {
 		
 		return daRit;
 	}
-    
-	
+    	
 	public BigDecimal calcolaTotaleOrdine(List<RigaOrdine> righeOrdine) {
 		BigDecimal totale = new BigDecimal(0);
 		for(RigaOrdine rigaOrdine : righeOrdine) {
 			totale = totale.add(rigaOrdine.getSubTotale());
 		}
 		return totale;
+<<<<<<< Updated upstream
 	}
 	 
+=======
+	} 
+>>>>>>> Stashed changes
 }

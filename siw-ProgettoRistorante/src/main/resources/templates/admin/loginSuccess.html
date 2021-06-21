@@ -12,18 +12,11 @@
 	<div th:replace="fragments/base.html :: navigator"></div>
 	
  	<div class="Corpo">
-		<form th:action="@{/loginSuccess}" method="POST">
-			&nbsp;
-			<table>
-				<tr>
-					<td><button type="submit">Aggiungi nuovo prodotto</button></td>
-				</tr>		
-				
-				<tr>
-					<td><button type="submit">Visulizza ordini</button></td>
-				</tr>			
-			</table>
-			&nbsp;
+		<form th:action="@{/admin/prodottoForm}" method="GET">
+			<button type="submit">Aggiungi nuovo prodotto</button>
+		</form>
+		<form>
+			<button type="submit">Visulizza ordini</button>
 		</form>
 	</div>
 	

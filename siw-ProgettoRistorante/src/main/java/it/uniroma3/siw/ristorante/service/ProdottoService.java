@@ -27,6 +27,11 @@ public class ProdottoService {
 	}
 
 	@Transactional
+	public Prodotto inserisci(Prodotto prodotto) {
+		return prodottoRepository.save(prodotto);
+	}	
+	
+	@Transactional
 	public boolean alreadyExists(Prodotto prodotto) {
 		List<Prodotto> prodotti = this.prodottoRepository.findByNome(prodotto.getNome());
 		if (prodotti.size() > 0)
