@@ -26,9 +26,15 @@
 				<td th:if="${ristoratoreCorrente == null}">	
 					<input style="width: 40px" type="number" value="1" />		
 				</td>
-				<td th:if="${ristoratoreCorrente == null}">	
-					<form th:href="@{admin/addCarello}" th:action="@{admin/addCarello}"
-					      th:method="GET">
+				<td>
+						
+					<form th:action="@{'/prodotto' + '/' + ${prodotto.id} +  '/' + 'addProdottoCarrello'}"
+					      th:method="POST">
+		            	<select name="quant" th:value = "${quant}" size="1">
+		            		<option th:each = "quant : ${quantita}"
+		            				th:text = "|${quant}|"
+		            				th:value = "${quant}">Numero</option>
+		            	</select>					     
 					      <button type="submit">&#128722;</button>
 					</form>
 				</td>

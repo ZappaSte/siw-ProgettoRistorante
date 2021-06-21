@@ -1,5 +1,7 @@
 package it.uniroma3.siw.ristorante.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,20 +28,24 @@ public class RigaOrdine {
 	@ManyToOne
 	private Prodotto prodotto;
 	
+	private BigDecimal subTotale;
+	
 	
 
 	public RigaOrdine(int quantita, Prodotto prodotto) {
 		this.quantita = quantita;
 		this.prodotto = prodotto;
+		this.subTotale = this.calcolaSubTotale();
 	}
 	
 	public RigaOrdine(int quantita) {
 		this.quantita = quantita;
+		this.subTotale = this.calcolaSubTotale();
 	}
 	
 
 	public RigaOrdine() {
-		// TODO Auto-generated constructor stub
+		this.subTotale = this.calcolaSubTotale();
 	}
 
 	/****************************************************************************************************/
@@ -76,6 +82,22 @@ public class RigaOrdine {
 
 	public void setProdotto(Prodotto prodotto) {
 		this.prodotto = prodotto;
+	}
+
+	public BigDecimal getSubTotale() {
+		return subTotale;
+	}
+
+	public void setSubTotale(BigDecimal subTotale) {
+		this.subTotale = subTotale;
+	}
+	
+	public BigDecimal calcolaSubTotale() {
+		BigDecimal daRit = new BigDecimal(0);
+		if(this.getProdotto()!=null) {
+			daRit = this.subTotale.add(this.getProdotto().getPrezzo().multiply(new BigDecimal(this.getQuantita())));
+		}
+		return daRit;
 	}
 	
 	

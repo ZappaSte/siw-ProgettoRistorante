@@ -34,7 +34,7 @@ public class Ordine {
 	
 	public Ordine() {
 		this.righeOrdine = new ArrayList<>();
-		this.totaleOrdine = new BigDecimal("0");
+		this.totaleOrdine = new BigDecimal(0);
 	}
 
 	@OneToMany(mappedBy ="ordine", cascade= {CascadeType.ALL})
@@ -73,26 +73,17 @@ public class Ordine {
 	}
 
 	public void setRigheOrdine(List<RigaOrdine> righeOrdine) {
-		this.righeOrdine = righeOrdine;
+		for(RigaOrdine rigaOrdine : righeOrdine) {
+			rigaOrdine.calcolaSubTotale();
+			this.righeOrdine.add(rigaOrdine);
+		}
 	}
 	
 	public void addRigaOrdine(RigaOrdine rigaOrdine) {
 		this.righeOrdine.add(rigaOrdine);
 	}
 	
-	public BigDecimal calcolaTotale() {
-		for(RigaOrdine rigaOrdine : righeOrdine) {
-			totaleOrdine.add(rigaOrdine.getProdotto().getPrezzo().multiply(new BigDecimal(rigaOrdine.getQuantita())));
-		}
-		
-		return totaleOrdine;
-	}
 	
-	/*public List<Prodotto> prodottiNellOrdine(){
-		for(RigaOrdine rigaOrdine : this.righeOrdine) {
-			
-		}
-	}*/
 	
 
 }

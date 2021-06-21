@@ -25,9 +25,14 @@
 							
 				</td>
 				<td>
-						<input name = "quantita" style="width: 40px" th:type="int" th:value="${quantita}"/>
+						
 					<form th:action="@{'/prodotto' + '/' + ${prodotto.id} +  '/' + 'addProdottoCarrello'}"
-					      th:method="GET">
+					      th:method="POST">
+		            	<select name="quant" th:value = "${quant}" size="1">
+		            		<option th:each = "quant : ${quantita}"
+		            				th:text = "|${quant}|"
+		            				th:value = "${quant}">Numero</option>
+		            	</select>					     
 					      <button type="submit">&#128722;</button>
 					</form>
 				</td>
