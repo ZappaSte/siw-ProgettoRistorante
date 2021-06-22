@@ -302,6 +302,7 @@ public class ProdottoController {
 			rigaOrdine.setOrdine(ordine);
 			rigaOrdineService.remove(rigaOrdine);
 			ordine.removeRigaOrdine(rigaOrdine);
+			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
 			if(ordine.getRigheOrdine().size()==0) {
 				return "carrelloVuoto";
 			}
