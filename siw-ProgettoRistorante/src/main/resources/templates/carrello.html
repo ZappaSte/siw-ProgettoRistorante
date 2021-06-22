@@ -24,7 +24,12 @@
 					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
 				</td>
 				<td style="width: 400px">
-					<i><a  th:text="|${rigaOrdine.subTotale} &euro;|">Quantita</a></i>
+					<b><a  th:text="|${rigaOrdine.subTotale} &euro;|">Quantita</a></b>
+				</td>
+				<td style="width: 400px">
+					<form th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'removeRigaOrdineCarrello'}" method="POST">
+						<button type="submit">Remove Riga</button>
+					</form>
 				</td>
 			</tr>
 			
@@ -33,7 +38,7 @@
 			</tr>
 		</table>
 		<form style="width: 400px">
-					<i><a  th:text="|${ordine.totaleOrdine} &euro;|">Totale</a></i>
+					<b><a  th:text="|${ordine.totaleOrdine} &euro;|">Totale</a></b>
 		</form>
 		
 		<form   th:if="${ordineSuccess == null}"

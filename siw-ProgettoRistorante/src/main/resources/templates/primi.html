@@ -24,7 +24,7 @@
 					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>	
 							
 				</td>
-				<td th:if="${ristoratoreCorrente == null}">						
+				<td>						
 					<form th:action="@{'/prodotto' + '/' + ${prodotto.id} +  '/' + 'addProdottoCarrello'}"
 					      th:method="POST">
 		            	<select name="quant" th:value = "${quant}" size="1">

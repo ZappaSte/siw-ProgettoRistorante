@@ -38,11 +38,11 @@ public class ProdottoController {
 	public ProdottoService prodottoService;
 	
 	@Autowired
-<<<<<<< Updated upstream
+
 	public OrdineService ordineService;
-=======
+
 	public ProdottoValidator prodottoValidator;
->>>>>>> Stashed changes
+
 		
 	@Autowired
 	private HttpSession session;
@@ -233,8 +233,8 @@ public class ProdottoController {
 			rigaOrdine.setProdotto(prodotto);
 			rigaOrdine.setQuantita(quantita);
 			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
-			rigaOrdine.setOrdine(ordine);
-			//rigaOrdineService.save(rigaOrdine);
+			//rigaOrdine.setOrdine(ordine);
+			rigaOrdineService.save(rigaOrdine);
 			ordine.addRigaOrdine(rigaOrdine);
 			session.setAttribute("carrello", ordine);
 			
@@ -242,7 +242,6 @@ public class ProdottoController {
 			return decidiPagDaRit(prodotto, model);
 		}
 	}
-	
 	
 	
 	
@@ -263,7 +262,32 @@ public class ProdottoController {
 			return "carrello";
 		}		
 	}	
-<<<<<<< Updated upstream
+	
+	/************************RIMOZIONE PRODOTTO DAL CARRELLO************************/
+	@RequestMapping(value ="/rigaOrdine/{id}/removeRigaOrdineCarrello", method=RequestMethod.POST)
+	public String removeRigaOrdineCarrello(@PathVariable("id") Long id, Model model) {
+		if(id==null) {
+			return "error";
+		}
+		else {
+			Ordine ordine = (Ordine) session.getAttribute("carrello");
+			RigaOrdine rigaOrdine = rigaOrdineService.findById(id);
+			rigaOrdine.setOrdine(ordine);
+			rigaOrdineService.remove(rigaOrdine);
+			ordine.removeRigaOrdine(rigaOrdine);
+			if(ordine.getRigheOrdine().size()==0) {
+				return "carrelloVuoto";
+			}
+			List<Integer> numTavoli = addInteger();
+			model.addAttribute("numTavoli", numTavoli);
+			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
+			model.addAttribute("ordine", ordine);
+			session.setAttribute("carrello", ordine);
+			
+			return "carrello";
+		}
+	}
+
 	
 	/************************CONFERMA ORDINE************************/
 	@RequestMapping(value="/confermaOrdine", method=RequestMethod.POST)
@@ -279,19 +303,7 @@ public class ProdottoController {
 		return "carrello";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
-		
->>>>>>> Stashed changes
+
 	public List<Integer> addInteger(){
 		List<Integer> daRit = new ArrayList<>();
 		Integer i=0;
@@ -309,10 +321,7 @@ public class ProdottoController {
 			totale = totale.add(rigaOrdine.getSubTotale());
 		}
 		return totale;
-<<<<<<< Updated upstream
 	}
 	 
-=======
-	} 
->>>>>>> Stashed changes
-}
+
+} 

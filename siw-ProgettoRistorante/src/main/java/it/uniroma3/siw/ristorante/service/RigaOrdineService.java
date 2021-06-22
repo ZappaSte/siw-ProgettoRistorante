@@ -39,5 +39,10 @@ public class RigaOrdineService {
 	public Object findAll() {
 		return rigaOrdineRepository.findAll();
 	}
+
+	public void remove(RigaOrdine rigaOrdine) {
+		rigaOrdineRepository.delete(rigaOrdine);
+		
+	}
 	
 }

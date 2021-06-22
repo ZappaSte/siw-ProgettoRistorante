@@ -93,6 +93,18 @@ public class Ordine {
 		this.righeOrdine.add(rigaOrdine);
 	}
 	
+	public void removeRigaOrdine(RigaOrdine rigaOrdine) {
+		if(righeOrdine.size()==1) {
+			this.righeOrdine.remove(rigaOrdine);
+			this.righeOrdine = new ArrayList<>();
+		}
+		for(RigaOrdine rO : this.righeOrdine) {
+			if(rO.getId().equals(rigaOrdine.getId())) {
+				this.righeOrdine.remove(rO);
+			}
+		}
+	}
+	
 	
 	
 	
