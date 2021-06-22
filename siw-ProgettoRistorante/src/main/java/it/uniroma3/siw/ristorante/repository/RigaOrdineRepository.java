@@ -17,5 +17,9 @@ public interface RigaOrdineRepository extends CrudRepository<RigaOrdine,Long>{
 	@Query("UPDATE RigaOrdine SET quantita = ?1, subTotale = ?2 WHERE id = ?3")
 	@Modifying
 	public void saveOrUpdateQuantita(int quantita,BigDecimal subTotale, Long id);
+	
+	@Query("UPDATE RigaOrdine SET ordine_id = ?1 WHERE id = ?2")
+	@Modifying
+	public void saveOrUpdateQuantita(Long idOrdine, Long id);
 
 }

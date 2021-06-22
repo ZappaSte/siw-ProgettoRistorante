@@ -321,6 +321,7 @@ public class ProdottoController {
 		ordine.setDataOrdine(LocalDateTime.now());
 		ordine.setNumTavolo(numTavolo);
 		ordineService.save(ordine);
+		this.addOrdineARigheOrdine(ordine);
 		model.addAttribute("ordineSuccess", ordine);
 		model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
 		model.addAttribute("ordine", ordine);
@@ -346,6 +347,15 @@ public class ProdottoController {
 			totale = totale.add(rigaOrdine.getSubTotale());
 		}
 		return totale;
+	}
+	
+	public void addOrdineARigheOrdine(Ordine ordine) {
+		for(RigaOrdine rigaOrdine : ordine.getRigheOrdine()) {
+			if(rigaOrdine.getOrdine()==null) {
+				rigaOrdine.setOrdine(ordine);
+				rigaOrdineService.saveOrUpdateOrdine(rigaOrdine);
+			}
+		}
 	}
 	 
 
