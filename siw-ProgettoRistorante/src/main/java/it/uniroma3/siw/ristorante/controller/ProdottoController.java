@@ -249,6 +249,8 @@ public class ProdottoController {
 	public String showCarrello(Model model) {
 		List<Integer> numTavoli = addInteger();
 		model.addAttribute("numTavoli", numTavoli);
+		List<Integer> quantitaDaMod = addInteger();
+		model.addAttribute("quantita", quantitaDaMod);
 		if(session.getAttribute("carrello")==null) {
 			return "carrelloVuoto";
 		}
@@ -262,6 +264,31 @@ public class ProdottoController {
 		}		
 	}	
 	
+	/************************MODIFICA QUANTITA PRODOTTO AL CARRELLO************************/
+	@RequestMapping(value ="/rigaOrdine/{id}/modificaQuantitaProdottoCarrello", method=RequestMethod.POST)
+	public String mdoficaQuantitaProdottoCarrello(@PathVariable("id") Long id,
+			@RequestParam(value = "quant") int quantita, Model model) {
+		List<Integer> numTavoli = addInteger();
+		model.addAttribute("numTavoli", numTavoli);
+		List<Integer> quantitaDaMod = addInteger();
+		model.addAttribute("quantita", quantitaDaMod);
+		if(id==null) {
+			return "error";
+		}
+		else {
+			RigaOrdine rigaOrdine = rigaOrdineService.findById(id);
+			rigaOrdine.setQuantita(quantita);
+			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
+			rigaOrdineService.saveOrUpdateQuantita(rigaOrdine);
+			Ordine ordine = (Ordine) session.getAttribute("carrello");
+			ordine.modificaRigaOrdine(rigaOrdine);
+			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
+			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
+			model.addAttribute("ordine", ordine);
+			session.setAttribute("carrello", ordine);
+			return "carrello";
+		}
+	}
 	
 	/************************RIMOZIONE PRODOTTO DAL CARRELLO************************/
 	@RequestMapping(value ="/rigaOrdine/{id}/removeRigaOrdineCarrello", method=RequestMethod.POST)
@@ -306,7 +333,7 @@ public class ProdottoController {
 	
 	public List<Integer> addInteger(){
 		List<Integer> daRit = new ArrayList<>();
-		Integer i=0;
+		Integer i=1;
 		while( i<=10) {
 			daRit.add(i);
 			i++;

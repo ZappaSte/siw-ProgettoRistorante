@@ -32,6 +32,7 @@ public class RigaOrdineService {
 			return false;
 	}
 
+	@Transactional
 	public void save(RigaOrdine rigaOrdine) {
 		rigaOrdineRepository.save(rigaOrdine);
 	}
@@ -42,6 +43,12 @@ public class RigaOrdineService {
 
 	public void remove(RigaOrdine rigaOrdine) {
 		rigaOrdineRepository.delete(rigaOrdine);
+		
+	}
+
+	@Transactional
+	public void saveOrUpdateQuantita(RigaOrdine rigaOrdine) {
+		this.rigaOrdineRepository.saveOrUpdateQuantita(rigaOrdine.getQuantita(),rigaOrdine.getSubTotale(),rigaOrdine.getId());
 		
 	}
 	

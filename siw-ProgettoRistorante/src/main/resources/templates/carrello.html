@@ -9,7 +9,7 @@
 	
 	<div th:replace="fragments/base.html :: logo"></div>
 
-	<h4>Primi Piatti</h4>
+	<h4>Ordine in costruzione:</h4>
 
 	<div th:replace="fragments/base.html :: navigator"></div>
 	
@@ -22,12 +22,24 @@
 				</td>	
 				<td style="width: 400px">
 					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
+					<form  th:if="${ordineSuccess == null}"
+							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'modificaQuantitaProdottoCarrello'}"
+								      th:method="POST">
+								      <b>Seleziona quantita da modificare:</b>
+								      <select name="quant" th:value = "${quant}" size="1">
+		            					<option th:each = "quant : ${quantita}"
+		            							th:text = "|${quant}|"
+		            							th:value = "${quant}">Numero</option>
+		            				  </select>
+								      <button type="submit">Modifica Quantita</button>
+					</form>
 				</td>
 				<td style="width: 400px">
 					<b><a  th:text="|${rigaOrdine.subTotale} &euro;|">Quantita</a></b>
 				</td>
 				<td style="width: 400px">
-					<form th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'removeRigaOrdineCarrello'}" method="POST">
+					<form   th:if="${ordineSuccess == null}"
+							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'removeRigaOrdineCarrello'}" method="POST">
 						<button type="submit">Remove Riga</button>
 					</form>
 				</td>
@@ -54,10 +66,12 @@
 		</form>
 		
 		<form   th:if="${ordineSuccess != null}"><b>Ordine Confermato</b><br>
+				<b>Identificativo Ordine:</b>
+				<b><a  th:text="|${ordine.id}|">Totale</a></b><br>
 				<b>Orario Ordine:</b>
-				<i><a  th:text="|${ordine.dataOrdine}|">Totale</a></i><br>
+				<b><a  th:text="|${ordine.dataOrdine}|">Totale</a></b><br>
 				<b>Sei al Tavolo:</b>
-				<i><a  th:text="|${ordine.numTavolo}|">Numero Tavolo</a></i>
+				<b><a  th:text="|${ordine.numTavolo}|">Numero Tavolo</a></b>
 		</form>		
 	</div>
 	

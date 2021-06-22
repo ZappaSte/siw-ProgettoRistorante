@@ -44,7 +44,8 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
                 		,"/primi/**", "/secondi" ,"/contorni","/pizze","/dolci", "/vini","/bevande","/carrello").permitAll()
                 // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 
                 .antMatchers(HttpMethod.POST, "/login", "/register", "/prodotto/{id}/addProdottoCarrello","/confermaOrdine",
-                							  "/rigaOrdine/{id}/removeRigaOrdineCarrello").permitAll()
+                							  "/rigaOrdine/{id}/removeRigaOrdineCarrello",
+                							  "/rigaOrdine/{id}/modificaQuantitaProdottoCarrello").permitAll()
                 // solo gli utenti autenticati con ruolo ADMIN possono accedere a risorse con path /admin/**
                 .antMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .antMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)

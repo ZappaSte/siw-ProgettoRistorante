@@ -95,7 +95,7 @@ public class RigaOrdine {
 	public BigDecimal calcolaSubTotale() {
 		BigDecimal daRit = new BigDecimal(0);
 		if(this.getProdotto()!=null) {
-			daRit = this.subTotale.add(this.getProdotto().getPrezzo().multiply(new BigDecimal(this.getQuantita())));
+			daRit = this.getProdotto().getPrezzo().multiply(new BigDecimal(this.getQuantita()));
 		}
 		return daRit;
 	}

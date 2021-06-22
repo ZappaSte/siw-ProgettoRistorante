@@ -39,7 +39,7 @@ public class Ordine {
 		this.totaleOrdine = new BigDecimal(0);
 	}
 
-	@OneToMany(mappedBy ="ordine", cascade= {CascadeType.ALL})
+	@OneToMany(mappedBy ="ordine", cascade= {CascadeType.MERGE})
 	private List<RigaOrdine> righeOrdine;
 
 	/****************************************************************************************************/
@@ -91,6 +91,16 @@ public class Ordine {
 	
 	public void addRigaOrdine(RigaOrdine rigaOrdine) {
 		this.righeOrdine.add(rigaOrdine);
+	}
+	
+	
+	public void modificaRigaOrdine(RigaOrdine rigaOrdine) {
+		for(RigaOrdine rO : this.righeOrdine) {
+			if(rO.getId().equals(rigaOrdine.getId())) {
+				rO.setQuantita(rigaOrdine.getQuantita());
+				rO.setSubTotale( rO.calcolaSubTotale());
+			}
+		}
 	}
 	
 	public void removeRigaOrdine(RigaOrdine rigaOrdine) {
