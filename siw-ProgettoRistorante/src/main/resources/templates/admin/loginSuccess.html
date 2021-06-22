@@ -15,9 +15,10 @@
 		<form th:action="@{/admin/prodottoForm}" method="GET">
 			<button type="submit">Aggiungi nuovo prodotto</button>
 		</form>
-		<form>
+		&nbsp;
+		<form th:action="@{/admin/ordini}" method="GET">
 			<button type="submit">Visulizza ordini</button>
-		</form>
+		</form>		
 	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>

@@ -38,11 +38,10 @@ public class ProdottoController {
 	public ProdottoService prodottoService;
 	
 	@Autowired
-
 	public OrdineService ordineService;
 
+	@Autowired
 	public ProdottoValidator prodottoValidator;
-
 		
 	@Autowired
 	private HttpSession session;
@@ -206,7 +205,7 @@ public class ProdottoController {
 			/* Se l'inserimento dei dati è corretto, ritorna alla pagina del menu del prodotto */
 	    	return this.decidiPagDaRit(prodotto, model);
 		}
-		return "admin/artistaForm";
+		return "admin/prodottoForm";
 	}
     
 	
@@ -263,6 +262,7 @@ public class ProdottoController {
 		}		
 	}	
 	
+	
 	/************************RIMOZIONE PRODOTTO DAL CARRELLO************************/
 	@RequestMapping(value ="/rigaOrdine/{id}/removeRigaOrdineCarrello", method=RequestMethod.POST)
 	public String removeRigaOrdineCarrello(@PathVariable("id") Long id, Model model) {
@@ -303,7 +303,7 @@ public class ProdottoController {
 		return "carrello";
 	}
 	
-
+	
 	public List<Integer> addInteger(){
 		List<Integer> daRit = new ArrayList<>();
 		Integer i=0;
@@ -324,4 +324,4 @@ public class ProdottoController {
 	}
 	 
 
-} 
+}
