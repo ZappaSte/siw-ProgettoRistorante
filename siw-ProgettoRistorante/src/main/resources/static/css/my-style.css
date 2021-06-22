@@ -51,6 +51,8 @@ ul {
 
 .Corpo {
   margin-left: 20%; /*Collegato a width di ul*/
+  color: black;
+  font-size: 20px;
 	}
 
 li a {
@@ -90,9 +92,13 @@ button, .button{
 }
 
 body {
-  	height:100%;
- 	background:lightskyblue;
-	
+  	height: 100%;
+  	width: 100%;
+  	margin-left: 0%;
+  	margin-right: 0%;
+ 	background-image: url("/images/Spartito.jpg");
+	background-size: 100%;
+	background-repeat: no-repeat;	
 }
 
 

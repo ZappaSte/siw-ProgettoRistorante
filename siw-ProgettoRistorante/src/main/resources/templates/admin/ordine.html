@@ -7,7 +7,7 @@
 	
 	<div th:replace="fragments/base.html :: logo"></div>
 	
-	<h4>Lista Ordini</h4>
+	<h4>Lista Ordine</h4>
 	
 	<div th:replace="fragments/base.html :: navigator"></div>
 	
@@ -27,8 +27,7 @@
 					<td style="width: 150px; text-align: center;">Totale Guadagno</td>
 				</tr>
 			</tfoot>
-			<tbody>
-				  
+			<tbody>				  
 				<tr th:each="rigaOrdine : ${righeOrdine}">
 					<td style="width: 300px; text-align: center;" th:text="${rigaOrdine.prodotto.nome}">Prodotto</td>
 					<td style="width: 150px; text-align: center;" th:text="${rigaOrdine.quantita}">Quantita</td>
