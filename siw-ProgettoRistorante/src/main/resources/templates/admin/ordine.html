@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles">
+</head>
+<body>
+	<div th:replace="fragments/base.html :: login"></div>
+	
+	<div th:replace="fragments/base.html :: logo"></div>
+	
+	<h4>Lista Ordini</h4>
+	
+	<div th:replace="fragments/base.html :: navigator"></div>
+	
+ 	<div class="Corpo">
+		<table>
+			<thead>
+				<tr>
+					<th style="width: 300px; text-align: center;">Prodotto</th>
+					<th style="width: 150px; text-align: center;">Quantit&agrave;</th>
+					<th style="width: 150px; text-align: center;">SubTotale</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td style="width: 300px; text-align: center;"></td>
+					<td style="width: 150px; text-align: center;"></td>
+					<td style="width: 150px; text-align: center;">Totale Guadagno</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each="rigaOrdine : ${ordine.righeOrdine}">
+					<td style="width: 300px; text-align: center;" th:text="${rigaOrdine.prodotto}">Prodotto</td>
+					<td style="width: 150px; text-align: center;" th:text="${rigaOrdine.quantita}">Quantita</td>
+					<td style="width: 150px; text-align: center;" th:text="|${rigaOrdine.subTotale} &euro;|">SubTotale</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>

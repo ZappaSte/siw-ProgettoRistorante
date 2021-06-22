@@ -54,7 +54,7 @@ public class RigaOrdineService {
 	
 	@Transactional
 	public void saveOrUpdateOrdine(RigaOrdine rigaOrdine) {
-		this.rigaOrdineRepository.saveOrUpdateQuantita(rigaOrdine.getOrdine().getId(),rigaOrdine.getId());
+		this.rigaOrdineRepository.saveOrUpdateOrdine(rigaOrdine.getOrdine().getId(),rigaOrdine.getId());
 		
 	}
 	

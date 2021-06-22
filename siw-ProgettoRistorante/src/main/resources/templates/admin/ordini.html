@@ -15,6 +15,7 @@
 		<table>
 			<thead>
 				<tr>
+					<th style="width: 100px; text-align: center;">ID</th>
 					<th style="width: 300px; text-align: center;">Data Ordine</th>
 					<th style="width: 150px; text-align: center;">Tavolo</th>
 					<th style="width: 150px; text-align: center;">Totale</th>
@@ -22,6 +23,7 @@
 			</thead>
 			<tfoot>
 				<tr>
+					<td style="width: 100px; text-align: center;"></td>
 					<td style="width: 300px; text-align: center;"></td>
 					<td style="width: 150px; text-align: center;"></td>
 					<td style="width: 150px; text-align: center;">Totale Guadagno</td>
@@ -29,9 +31,15 @@
 			</tfoot>
 			<tbody>
 				<tr th:each="ordine : ${ordini}">
+					<td style="width: 100px; text-align: center;" th:text="${ordine.id}">Id</td>
 					<td style="width: 300px; text-align: center;" th:text="${ordine.dataOrdine}">Data</td>
 					<td style="width: 150px; text-align: center;" th:text="${ordine.numTavolo}">Tavolo</td>
-					<td style="width: 150px; text-align: center;" th:text="|${ordine.totaleOrdine} &euro;|">Prezzo</td>					
+					<td style="width: 150px; text-align: center;" th:text="|${ordine.totaleOrdine} &euro;|">Prezzo</td>
+					<td>
+						<form th:action="@{admin/RigaOrdine/{id}}" method="GET">
+							<button type="button">Dettagli</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
