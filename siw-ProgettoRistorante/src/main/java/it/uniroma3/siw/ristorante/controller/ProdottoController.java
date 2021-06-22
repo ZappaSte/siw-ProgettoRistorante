@@ -293,10 +293,7 @@ public class ProdottoController {
 	/************************RIMOZIONE PRODOTTO DAL CARRELLO************************/
 	@RequestMapping(value ="/rigaOrdine/{id}/removeRigaOrdineCarrello", method=RequestMethod.POST)
 	public String removeRigaOrdineCarrello(@PathVariable("id") Long id, Model model) {
-		if(id==null) {
-			return "error";
-		}
-		else {
+
 			Ordine ordine = (Ordine) session.getAttribute("carrello");
 			RigaOrdine rigaOrdine = rigaOrdineService.findById(id);
 			rigaOrdine.setOrdine(ordine);
@@ -312,8 +309,8 @@ public class ProdottoController {
 			model.addAttribute("ordine", ordine);
 			session.setAttribute("carrello", ordine);
 			
-			return "carrello";
-		}
+			return "redirect:/carrello";
+		
 	}
 
 	

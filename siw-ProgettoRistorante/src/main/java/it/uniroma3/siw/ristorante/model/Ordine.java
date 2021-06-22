@@ -110,7 +110,8 @@ public class Ordine {
 		}
 		for(RigaOrdine rO : this.righeOrdine) {
 			if(rO.getId().equals(rigaOrdine.getId())) {
-				this.righeOrdine.remove(rO);
+				RigaOrdine r = rO;
+				this.righeOrdine.remove(r);
 			}
 		}
 	}
