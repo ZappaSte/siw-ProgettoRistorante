@@ -103,21 +103,20 @@ public class Ordine {
 		}
 	}
 	
-	public void removeRigaOrdine(RigaOrdine rigaOrdine) {
+	public boolean removeRigaOrdine(RigaOrdine rigaOrdine) {
 		if(righeOrdine.size()==1) {
 			this.righeOrdine.remove(rigaOrdine);
 			this.righeOrdine = new ArrayList<>();
+			return true;
 		}
 		for(RigaOrdine rO : this.righeOrdine) {
 			if(rO.getId().equals(rigaOrdine.getId())) {
-				RigaOrdine r = rO;
-				this.righeOrdine.remove(r);
+				this.righeOrdine.remove(rO);
+				return true;
 			}
 		}
+		return false;
 	}
-	
-	
-	
-	
 
+	
 }
