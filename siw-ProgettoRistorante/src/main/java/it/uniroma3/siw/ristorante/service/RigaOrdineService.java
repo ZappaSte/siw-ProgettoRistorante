@@ -1,5 +1,7 @@
 package it.uniroma3.siw.ristorante.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +56,19 @@ public class RigaOrdineService {
 	
 	@Transactional
 	public void saveOrUpdateOrdine(RigaOrdine rigaOrdine) {
-		this.rigaOrdineRepository.saveOrUpdateOrdine(rigaOrdine.getOrdine().getId(),rigaOrdine.getId());
-		
+		this.rigaOrdineRepository.saveOrUpdateOrdine(rigaOrdine.getOrdine().getId(),rigaOrdine.getId());		
 	}
 	
+	
+	
+	@Transactional
+	public List<RigaOrdine> findAllById(Long idOrdine) {
+		List<Long> idRiga  = this.rigaOrdineRepository.findAllById(idOrdine);
+		List<RigaOrdine> righeOrdine = new ArrayList<>();
+		for(Long id : idRiga) {
+			righeOrdine.add(this.findById(id));
+		}
+
+		return 	righeOrdine;
+	}
 }

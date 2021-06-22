@@ -28,8 +28,9 @@
 				</tr>
 			</tfoot>
 			<tbody>
-				<tr th:each="rigaOrdine : ${ordine.righeOrdine}">
-					<td style="width: 300px; text-align: center;" th:text="${rigaOrdine.prodotto}">Prodotto</td>
+				  
+				<tr th:each="rigaOrdine : ${righeOrdine}">
+					<td style="width: 300px; text-align: center;" th:text="${rigaOrdine.prodotto.nome}">Prodotto</td>
 					<td style="width: 150px; text-align: center;" th:text="${rigaOrdine.quantita}">Quantita</td>
 					<td style="width: 150px; text-align: center;" th:text="|${rigaOrdine.subTotale} &euro;|">SubTotale</td>
 				</tr>

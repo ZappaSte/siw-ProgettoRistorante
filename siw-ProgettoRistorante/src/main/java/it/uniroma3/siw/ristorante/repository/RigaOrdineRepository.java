@@ -1,6 +1,7 @@
 package it.uniroma3.siw.ristorante.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,5 +22,8 @@ public interface RigaOrdineRepository extends CrudRepository<RigaOrdine,Long>{
 	@Query("UPDATE RigaOrdine SET ordine_id = ?1 WHERE id = ?2")
 	@Modifying
 	public void saveOrUpdateOrdine(Long idOrdine, Long id);
+	
+	@Query("SELECT id FROM RigaOrdine WHERE ordine_id = ?1")
+	public List<Long> findAllById(Long idOrdine);
 
 }
