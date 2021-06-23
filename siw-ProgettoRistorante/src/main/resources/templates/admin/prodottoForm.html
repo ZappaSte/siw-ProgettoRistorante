@@ -32,8 +32,11 @@
 		        <tr>
 		            <td>Categoria</td>
 		            <td>
-		            	<input style="width: 100px" type="text" placeholder="categoria"
-		                       th:field="${prodotto.categoria}"/>PRIMO,SECONDO,CONTORNO,PIZZA,DOLCE,VINO,BEVANDA
+		            	<select name="categoria" th:value = "${categoria}" size="1">
+		            		<option th:each = "categoria : ${categorie}"
+		            				th:text = "|${categoria}|"
+		            				th:value = "${categoria}">Numero</option>
+		            	</select>
 		            </td>
 		        </tr>
 		        <tr>

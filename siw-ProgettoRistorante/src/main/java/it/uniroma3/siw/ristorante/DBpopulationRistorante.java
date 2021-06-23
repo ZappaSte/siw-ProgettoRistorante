@@ -63,6 +63,27 @@ public class DBpopulationRistorante implements ApplicationRunner{
 		Prodotto p13 = new Prodotto("Sprite",new BigDecimal("2"), "33cL", Prodotto.BEVANDE_CAT);
 		Prodotto p14 = new Prodotto("Vino Rosso",new BigDecimal("18"), "Vino rosso dei castelli", Prodotto.VINO_CAT);
 		Prodotto p15 = new Prodotto("Falanghina",new BigDecimal("18"), "Vino bianco, falanghina beneventana", Prodotto.VINO_CAT);
+		Prodotto p16 = new Prodotto("Montepulciano d'Abruzzo",new BigDecimal("16"), "Vino rosso tipico abruzzese, consigliato con la carne", Prodotto.VINO_CAT);
+		Prodotto p17 = new Prodotto("Acqua Naturale",new BigDecimal("2"), "Acqua 1.5Lt", Prodotto.BEVANDE_CAT);
+		Prodotto p18 = new Prodotto("Acqua Frizzante",new BigDecimal("2"), "Acqua 1.5Lt", Prodotto.BEVANDE_CAT);
+		Prodotto p19 = new Prodotto("Coca Cola",new BigDecimal("2.5"), "Coca Cola 1.5Lt", Prodotto.BEVANDE_CAT);
+		Prodotto p20 = new Prodotto("Coca Cola Lattina",new BigDecimal("1.5"), "Coca Cola 33cL", Prodotto.BEVANDE_CAT);
+		Prodotto p21 = new Prodotto("Fanta",new BigDecimal("2.5"), "Fanta Aranciata 1.5Lt", Prodotto.BEVANDE_CAT);
+		Prodotto p22 = new Prodotto("Millefoglie",new BigDecimal("4"), "Dolce millefoglie con crema ai frutti di bosco", Prodotto.DOLCE_CAT);
+		Prodotto p23 = new Prodotto("Tiramisu",new BigDecimal("4"), "Tiramisu con caffe e cacao", Prodotto.DOLCE_CAT);
+		Prodotto p24 = new Prodotto("Passerina",new BigDecimal("18"), "Vino bianco Marchigiano, consigliato per il pesce", Prodotto.VINO_CAT);
+		Prodotto p25 = new Prodotto("Torta della Nonna",new BigDecimal("4"), "Torta della nonna con crema pasticciera e gocce di cioccolato", Prodotto.DOLCE_CAT);
+		Prodotto p26 = new Prodotto("Marinara",new BigDecimal("4.5"), "Pizza con pomodoro e origano", Prodotto.PIZZA_CAT);
+		Prodotto p27 = new Prodotto("Margherita",new BigDecimal("5"), "Pizza con pomodoro, moozarella e basilico", Prodotto.PIZZA_CAT);
+		Prodotto p28 = new Prodotto("Patate e Wurtsel",new BigDecimal("6"), "Pizza con patate, wurtsel e mozzarella, base bianca", Prodotto.PIZZA_CAT);
+		Prodotto p29 = new Prodotto("Boscaiola",new BigDecimal("6.5"), "Pizza con funghi, salsiccia e mozzarella ", Prodotto.PIZZA_CAT);
+		Prodotto p30 = new Prodotto("Fiori e Alici",new BigDecimal("6.5"), "Pizza con fiori, alici e mozzarella, base bianca", Prodotto.PIZZA_CAT);
+		Prodotto p31 = new Prodotto("Vegetale",new BigDecimal("7"), "Pizza margherita con zucchine, peperoni e melanzane grigliate", Prodotto.PIZZA_CAT);
+		Prodotto p32 = new Prodotto("Montanara",new BigDecimal("10"), "Pizza margerita con speck, provola e salsa tartufata", Prodotto.PIZZA_CAT);
+		Prodotto p33 = new Prodotto("Napoli",new BigDecimal("6"), "Pizza margherita con alici", Prodotto.PIZZA_CAT);
+		Prodotto p34 = new Prodotto("Calzone rustico",new BigDecimal("8"), "Calzone rusticon con mozzarella, prosciutto crudo e funghi", Prodotto.PIZZA_CAT);
+		Prodotto p35 = new Prodotto("Terra e Mare",new BigDecimal("8"), "Pizza con mozzarella, zucchine, gamberetti e salsa rosa", Prodotto.PIZZA_CAT);
+		
 		
 		
 		
@@ -81,6 +102,28 @@ public class DBpopulationRistorante implements ApplicationRunner{
 		prodottoRepository.save(p13);
 		prodottoRepository.save(p14);
 		prodottoRepository.save(p15);
+		prodottoRepository.save(p16);
+		prodottoRepository.save(p17);
+		prodottoRepository.save(p18);
+		prodottoRepository.save(p19);
+		prodottoRepository.save(p20);
+		prodottoRepository.save(p21);
+		prodottoRepository.save(p22);
+		prodottoRepository.save(p23);
+		prodottoRepository.save(p24);
+		prodottoRepository.save(p25);
+		prodottoRepository.save(p26);
+		prodottoRepository.save(p27);
+		prodottoRepository.save(p28);
+		prodottoRepository.save(p29);
+		prodottoRepository.save(p30);
+		prodottoRepository.save(p31);
+		prodottoRepository.save(p32);
+		prodottoRepository.save(p33);
+		prodottoRepository.save(p34);
+		prodottoRepository.save(p35);
+		
+		
 		
 		
 		Ristoratore r1 = new Ristoratore();

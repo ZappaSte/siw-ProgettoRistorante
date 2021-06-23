@@ -189,17 +189,20 @@ public class ProdottoController {
     /************************AGGIUNTA DI UN NUOVO PRODOTTO************************/
     @RequestMapping(value = "/admin/prodottoForm", method = RequestMethod.GET)
 	public String adminAggiungeProdotto(Model model) {
-		model.addAttribute("prodotto", new Prodotto());
+    	Prodotto p = new Prodotto();
+		model.addAttribute("prodotto", p);
+		model.addAttribute("categorie", p.categorie());
 		return "admin/prodottoForm";
 	}
 	
 	@RequestMapping(value = { "/admin/prodottoForm" }, method = RequestMethod.POST)
 	public String registerProdotto(@ModelAttribute("prodotto") Prodotto prodotto,
-								Model model,BindingResult bindingResult){
+								@RequestParam("categoria") String categoria, Model model,BindingResult bindingResult){
 		/*Controlla se il prodotto è già presente nel menu*/
 		this.prodottoValidator.validate(prodotto, bindingResult);
 		/*Se non ci sono erroti*/
 		if(!bindingResult.hasErrors()) {
+			prodotto.setCategoria(categoria);
 			this.prodottoService.inserisci(prodotto);
 			model.addAttribute("artisti", this.prodottoService.findAll());
 			/* Se l'inserimento dei dati è corretto, ritorna alla pagina del menu del prodotto */

@@ -2,6 +2,7 @@ package it.uniroma3.siw.ristorante.model;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +24,6 @@ public class Prodotto {
 	public static final String DOLCE_CAT = "DOLCE";
 	public static final String VINO_CAT = "VINO";
 	public static final String BEVANDE_CAT = "BEVANDA";
-	
 	
 	
 	/*DEFINIZIONE VARIABILI*/
@@ -100,6 +100,13 @@ public class Prodotto {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public List<String> categorie(){
+		List<String> categorie = new ArrayList<>();
+	categorie.add(PRIMO_CAT); categorie.add(SECONDO_CAT);categorie.add(CONTORNO_CAT);categorie.add(PIZZA_CAT);categorie.add(DOLCE_CAT);
+	categorie.add(VINO_CAT);categorie.add(BEVANDE_CAT);
+	return categorie;
 	}
 	
 }
