@@ -317,6 +317,11 @@ public class ProdottoController {
 		
 	}
 
+	@RequestMapping(value = "/carrelloVuoto", method = RequestMethod.GET) 
+	public String showCarrelloVuoto (Model model) {
+		return "carrelloVuoto";
+	}
+	
 	
 	/************************CONFERMA ORDINE************************/
 	@RequestMapping(value="/confermaOrdine", method=RequestMethod.POST)
