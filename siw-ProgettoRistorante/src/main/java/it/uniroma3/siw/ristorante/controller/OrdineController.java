@@ -18,7 +18,7 @@ public class OrdineController {
 	public OrdineService ordineService;
 	
 	/************************VISUALIZZA LISTA ORDINI************************/
-    @RequestMapping(value = "admin/ordini", method = RequestMethod.GET)
+    @RequestMapping(value = "ordini", method = RequestMethod.GET)
     public String getOrdini(Model model) {    	
     	model.addAttribute("ordini", this.ordineService.findAll());	
 		return "admin/ordini";

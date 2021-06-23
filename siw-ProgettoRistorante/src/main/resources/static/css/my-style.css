@@ -21,6 +21,11 @@
 	height: 200px;
 }
 
+.Error{
+	width:400px;
+	height:400px;
+}
+
 h4 {
 	height: 20%px;
 	color: red;

@@ -11,7 +11,7 @@
 	
 	<div th:replace="fragments/base.html :: navigator"></div>
 	<div class="Corpo"> 			
-		<form th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}" method="POST">
+		<form th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'modificaProdotto'}" method="POST">
 			<table>
 				<tr>
 		            <td>Nome Prodotto</td>
@@ -30,8 +30,12 @@
 		        </tr>
 		        <tr>
 		            <td>Categoria</td>
-		            <td><input style="width: 100px" type="text" placeholder="categoria"
-		                       th:field="${prodotto.categoria}"/>PRIMO,SECONDO,CONTORNO,PIZZA,DOLCE,VINO,BEVANDA</td>
+		            <td><select name="categoria" th:value = "${categoria}" size="1">
+		            		<option th:each = "categoria : ${categorie}"
+		            				th:text = "|${categoria}|"
+		            				th:value = "${categoria}">Numero</option>
+		            	</select>
+		            </td>
 		                       
 		        </tr>
 				<tr>

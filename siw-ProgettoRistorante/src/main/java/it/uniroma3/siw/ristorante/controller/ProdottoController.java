@@ -169,13 +169,15 @@ public class ProdottoController {
     
     
     /************************MODIFICA PRODOTTO************************/
-    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.GET)
+    @RequestMapping(value = "prodotto/{id}/modificaProdotto", method = RequestMethod.GET)
     public String modificaCollezione(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("prodotto", this.prodottoService.findById(id));
+    	Prodotto p = this.prodottoService.findById(id);
+		model.addAttribute("prodotto", p);
+		model.addAttribute("categorie", p.categorie());
 		return "admin/modificaProdotto";
     }
     
-    @RequestMapping(value = "prodotto/{id}/admin/modificaProdotto", method = RequestMethod.POST)
+    @RequestMapping(value = "prodotto/{id}/modificaProdotto", method = RequestMethod.POST)
     public String registerModificaProdotto(@PathVariable("id") Long id,@Validated @ModelAttribute("prodotto") Prodotto prodotto,
     				Model model) {    	
     	/*Aggiorna Modifiche Prodoto*/
@@ -187,7 +189,7 @@ public class ProdottoController {
     
     
     /************************AGGIUNTA DI UN NUOVO PRODOTTO************************/
-    @RequestMapping(value = "/admin/prodottoForm", method = RequestMethod.GET)
+    @RequestMapping(value = "/prodottoForm", method = RequestMethod.GET)
 	public String adminAggiungeProdotto(Model model) {
     	Prodotto p = new Prodotto();
 		model.addAttribute("prodotto", p);
@@ -195,7 +197,7 @@ public class ProdottoController {
 		return "admin/prodottoForm";
 	}
 	
-	@RequestMapping(value = { "/admin/prodottoForm" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/prodottoForm" }, method = RequestMethod.POST)
 	public String registerProdotto(@ModelAttribute("prodotto") Prodotto prodotto,
 								@RequestParam("categoria") String categoria, Model model,BindingResult bindingResult){
 		/*Controlla se il prodotto è già presente nel menu*/
@@ -303,7 +305,7 @@ public class ProdottoController {
 			ordine.removeRigaOrdine(rigaOrdine);
 			ordine.setTotaleOrdine(this.calcolaTotaleOrdine(ordine.getRigheOrdine()));
 			if(ordine.getRigheOrdine().size()==0) {
-				return "carrelloVuoto";
+				return "redirect:/carrelloVuoto";
 			}
 			List<Integer> numTavoli = addInteger();
 			model.addAttribute("numTavoli", numTavoli);

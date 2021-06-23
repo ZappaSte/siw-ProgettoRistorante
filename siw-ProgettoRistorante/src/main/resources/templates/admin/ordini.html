@@ -36,7 +36,7 @@
 					<td style="width: 150px; text-align: center;" th:text="${ordine.numTavolo}">Tavolo</td>
 					<td style="width: 150px; text-align: center;" th:text="|${ordine.totaleOrdine} &euro;|">Prezzo</td>
 					<td>
-						<form th:action="@{'/admin/RigheOrdine' + '/' + ${ordine.id}}" method="GET">
+						<form th:action="@{'/RigheOrdine' + '/' + ${ordine.id}}" method="GET">
 							<button type="submit">Dettagli</button>
 						</form>
 					</td>

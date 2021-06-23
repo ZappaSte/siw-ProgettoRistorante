@@ -18,7 +18,7 @@ public class RigaOrdineController {
 	public RigaOrdineService rigaOrdineService;
 	
 	/************************VISUALIZZA RIGHE ORDINE DI ORDINE************************/
-    @RequestMapping(value = "admin/RigheOrdine/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "RigheOrdine/{id}", method = RequestMethod.GET)
     public String getRigheOrdineById(@PathVariable("id") Long id, Model model) {
     	model.addAttribute("righeOrdine", this.rigaOrdineService.findAllById(id));	
 		return "admin/ordine";

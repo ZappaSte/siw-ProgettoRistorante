@@ -35,15 +35,15 @@
 					</form>
 				</td>
 				<td th:if="${ristoratoreCorrente != null}">
-					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
-				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'modificaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'modificaProdotto'}"
 				          th:method="GET">
 				          <button type="submit">Modifica</button>
 					</form>				
 				</td>
 				<td th:if="${ristoratoreCorrente != null}">	
-					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
-				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'eliminaProdotto'}"
+				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'eliminaProdotto'}"
 				          th:method="GET">
 				          <button type="submit">Elimina</button>
 					</form>	
