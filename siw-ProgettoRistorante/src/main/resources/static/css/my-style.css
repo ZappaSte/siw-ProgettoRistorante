@@ -79,8 +79,8 @@ body {
   	width: 100%;
   	margin-left: 0%;
   	margin-right: 0%;
- 	background-image: url("/images/Legno1.jpg");
-	background-size: 100%;
+ 	/*background-image: url("/images/Legno1.jpg");*/
+ 	background: #808080;
 }
 
 

@@ -235,7 +235,6 @@ public class ProdottoController {
 			rigaOrdine.setProdotto(prodotto);
 			rigaOrdine.setQuantita(quantita);
 			rigaOrdine.setSubTotale(rigaOrdine.calcolaSubTotale());
-			//rigaOrdine.setOrdine(ordine);
 			rigaOrdineService.save(rigaOrdine);
 			ordine.addRigaOrdine(rigaOrdine);
 			session.setAttribute("carrello", ordine);
