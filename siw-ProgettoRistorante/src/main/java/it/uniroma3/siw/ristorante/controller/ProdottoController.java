@@ -150,13 +150,13 @@ public class ProdottoController {
 	
 	
 	/************************ELIMINAZIONE PRODOTTO************************/
-	@RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.GET)
+	@RequestMapping(value = "prodotto/{id}/eliminaProdotto", method = RequestMethod.GET)
     public String eliminaProdotto(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("prodotto", this.prodottoService.findById(id));
 		return "admin/eliminaProdotto";		
     }    
 	
-    @RequestMapping(value = "prodotto/{id}/admin/eliminaProdotto", method = RequestMethod.POST)
+    @RequestMapping(value = "prodotto/{id}/eliminaProdotto", method = RequestMethod.POST)
     public String registerEliminaProdotto(@PathVariable("id") Long id, Model model) {
     	Prodotto prodotto = prodottoService.findById(id);
     	/* Cancella la collezione dal db */

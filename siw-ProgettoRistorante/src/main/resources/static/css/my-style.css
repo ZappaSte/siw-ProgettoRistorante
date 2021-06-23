@@ -103,15 +103,18 @@ a{
   	font-family: "Comic Sans MS", cursive;
 }
 	
-/*.Footer{
-		border-radius: 10px 10px 10px 10px;
+.Footer{
 		text-align: center;
 		margin-left: 1%;
 		margin-right: 1%;
-		background: lightgray;
+		width: 99%;
+    /* posizionamento in fondo alla pagina */
+   		color: #ffff80;
+    	bottom: 10px;
+    	overflow: hidden;
 		padding: auto;
 		font-size: 13px;
 		font-weight: bold;
 		font-style: italic;
 		font-family: "Times New Roman", Georgia, Serif;
-	}*/
+	}

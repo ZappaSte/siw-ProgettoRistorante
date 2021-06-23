@@ -33,6 +33,7 @@ public class AuthenticationController {
 	public String showLoginForm (Model model) {
 		return "loginForm";
 	}
+	
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {

@@ -38,23 +38,7 @@
 		            	      <button type="submit">&#8634;</button>						  
 						</form>
 					</td>
-					<!--  
-					<td style="width: 400px">
-					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
-					<form  th:if="${ordineSuccess == null}"
-							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'modificaQuantitaProdottoCarrello'}"
-								      th:method="POST">
-								      <b>Seleziona quantita da modificare:</b>
-								      <select name="quant" th:value = "${quant}" size="1">
-		            					<option th:each = "quant : ${quantita}"
-		            							th:text = "|${quant}|"
-		            							th:value = "${quant}">Numero</option>
-		            				  </select>
-								      <button type="submit">&#8634;</button>
-					</form>
-					</td>-->				
-					
-					
+									
 					<td style="width: 150px; text-align: center;" th:text="|${rigaOrdine.subTotale} &euro;|">SubTotale</td>
 					<td style="width: 150px; text-align: left;">
 						<form th:if="${ordineSuccess == null}" 
@@ -84,75 +68,10 @@
 		</form>		
 	</div>
 	
-	
-	
-	
-	
-	
-		<!-- 
- 		&nbsp;
-		<table class="Prodotto" th:each="rigaOrdine : ${carrelloDaMostrare}">
-			<tr>
-				<td style="width: 400px">
-					<b><a  th:text="${rigaOrdine.prodotto.nome}">Nome</a></b>
-				</td>	
-				<td style="width: 400px">
-					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
-					<form  th:if="${ordineSuccess == null}"
-							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'modificaQuantitaProdottoCarrello'}"
-								      th:method="POST">
-								      <b>Seleziona quantita da modificare:</b>
-								      <select name="quant" th:value = "${quant}" size="1">
-		            					<option th:each = "quant : ${quantita}"
-		            							th:text = "|${quant}|"
-		            							th:value = "${quant}">Numero</option>
-		            				  </select>
-								      <button type="submit">Modifica Quantita</button>
-					</form>
-				</td>
-				<td style="width: 400px">
-					<b><a  th:text="|${rigaOrdine.subTotale} &euro;|">Quantita</a></b>
-				</td>
-				<td style="width: 400px">
-					<form   th:if="${ordineSuccess == null}"
-							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'removeRigaOrdineCarrello'}" method="POST">
-						<button type="submit">Remove Riga</button>
-					</form>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-		</table>
-		 -->
-		
-		
-	
-	<div th:replace="fragments/base.html :: footer"></div>
+
 </body>
 </html>
 
 
 
 
-
-<!-- 
-<span th:if="${ristoratoreCorrente != null}">
-				<td>
-					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
-				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/modificaProdotto'}"
-				          th:method="GET">
-				          <button type="submit">Modifica</button>
-					</form>				
-				</td>
-				<td>	
-					<form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
-				   		  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
-				          th:method="GET">
-				          <button type="submit">Elimina</button>
-					</form>	
-				</td>				
-			</span>	
-
- -->

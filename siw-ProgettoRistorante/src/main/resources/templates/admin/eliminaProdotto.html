@@ -7,7 +7,7 @@
 	
 	<div th:replace="fragments/base.html :: logo"></div>
 	
-	<h4>Eleminazione Prodotto</h4>
+	<h4>Eliminazione Prodotto</h4>
 	
 	<div th:replace="fragments/base.html :: navigator"></div>
  	<div class="Corpo">
@@ -15,8 +15,8 @@
  		<h1>
  			<a th:text="|Sicuro di voler eliminare il Prodotto '${prodotto.nome}' ?|"></a>
 	    </h1>
-	    <form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
-			  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'admin/eliminaProdotto'}"
+	    <form th:href="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'eliminaProdotto'}"
+			  th:action="@{'/prodotto' + '/' + ${prodotto.id} + '/' + 'eliminaProdotto'}"
 			  th:method="POST">
 			  <button type="submit">Elimina</button>			  
 			  <input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
