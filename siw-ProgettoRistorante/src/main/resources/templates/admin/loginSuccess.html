@@ -18,7 +18,12 @@
 		&nbsp;
 		<form th:action="@{/admin/ordini}" method="GET">
 			<button type="submit">Visulizza ordini</button>
-		</form>		
+		</form>	
+		&nbsp;
+		<form>
+			<input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+		</form>
+			
 	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>

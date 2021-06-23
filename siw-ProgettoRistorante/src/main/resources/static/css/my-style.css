@@ -9,9 +9,11 @@
 
 .Titolo{
 	float: left; 
-	margin-right: 5%; 
+	margin-right: 20%; 
 	margin-left: 1.5%;
 	margin-top:1%;
+	position: fixed; /* Fallo aderire, anche sullo scorrimento */
+    overflow: auto; /* Abilita lo scorrimento se il sidenav ha troppi contenuti */
 }
 
 .Logo{
@@ -69,36 +71,16 @@ li a:hover {
     color: white;
 }
 
-/*.active {
-    background-color: #4CAF50;
-    color: white;
-}*/
-
-/*button, .button {
-  border-radius: 10px 10px 10px 10px;
-  margin-bottom: 1%;
-  width:150px;
-  height:30px;
-  background: red;
-  font-weight: bold;
-  font-family: "Times New Roman", Georgia, Serif;
-  text-align: center;
-  outline: none;
-  text-decoration: none;
-}*/
-
 button, .button{
 	border-radius: 10px 10px 10px 10px;
 }
 
 body {
-  	height: 100%;
   	width: 100%;
   	margin-left: 0%;
   	margin-right: 0%;
- 	background-image: url("/images/Spartito.jpg");
+ 	background-image: url("/images/Legno1.jpg");
 	background-size: 100%;
-	background-repeat: no-repeat;	
 }
 
 

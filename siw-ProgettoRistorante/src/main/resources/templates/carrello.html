@@ -9,11 +9,87 @@
 	
 	<div th:replace="fragments/base.html :: logo"></div>
 
-	<h4>Ordine in costruzione:</h4>
+	<h4>Ordine in costruzione</h4>
 
 	<div th:replace="fragments/base.html :: navigator"></div>
 	
 	<div class="Corpo">
+		<table >
+			<thead>
+				<tr>
+					<th style="width: 300px; text-align: center;">Prodotto</th>
+					<th style="width: 150px; text-align: center;" colspan="2">Quantit&agrave;</th>
+					<th style="width: 150px; text-align: center;">SubTotale</th>
+				</tr>
+			</thead>
+			<tbody>				  
+				<tr th:each="rigaOrdine : ${carrelloDaMostrare}">
+					<td style="width: 300px; text-align: center;" th:text="${rigaOrdine.prodotto.nome}">Prodotto</td>
+					
+					<td style="width: 50px; text-align: right; " th:text="${rigaOrdine.quantita}">Quantita</td>
+					<td style="margin-left: 0px; text-align: left;">										
+						<form th:if="${ordineSuccess == null}"
+							  th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'modificaQuantitaProdottoCarrello'}"
+							  th:method="POST">
+							  <select name="quant" th:value = "${quant}">
+							  		<option th:each = "quant : ${quantita}" th:text = "|${quant}|"
+							  				th:value = "${quant}">Numero</option>
+		            	      </select>
+		            	      <button type="submit">&#8634;</button>						  
+						</form>
+					</td>
+					<!--  
+					<td style="width: 400px">
+					<b><a  th:text="${rigaOrdine.quantita}">Quantita</a></b>
+					<form  th:if="${ordineSuccess == null}"
+							th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'modificaQuantitaProdottoCarrello'}"
+								      th:method="POST">
+								      <b>Seleziona quantita da modificare:</b>
+								      <select name="quant" th:value = "${quant}" size="1">
+		            					<option th:each = "quant : ${quantita}"
+		            							th:text = "|${quant}|"
+		            							th:value = "${quant}">Numero</option>
+		            				  </select>
+								      <button type="submit">&#8634;</button>
+					</form>
+					</td>-->				
+					
+					
+					<td style="width: 150px; text-align: center;" th:text="|${rigaOrdine.subTotale} &euro;|">SubTotale</td>
+					<td style="width: 150px; text-align: left;">
+						<form th:if="${ordineSuccess == null}" 
+							  th:action="@{'/rigaOrdine' + '/' + ${rigaOrdine.id} +  '/' + 'removeRigaOrdineCarrello'}" method="POST">
+							<button type="submit">&#9003;</button>
+						</form>
+					<td>
+				</tr>
+			</tbody>
+		</table>
+	
+		<form style="margin-left: 435px;">
+			<b><a  th:text="|Totale: ${ordine.totaleOrdine} &euro;|">Totale</a></b>
+		</form>
+		
+		<form th:if="${ordineSuccess == null}" th:action="@{/confermaOrdine}" th:method="POST">
+			<b>Seleziona Tavolo:</b>
+			<select name="numTavolo" th:value = "${numTavolo}" size="1">
+				<option th:each = "numTavolo : ${numTavoli}" th:text = "|${numTavolo}|"
+						th:value = "${numTavolo}">Numero</option>
+		  	</select>
+		  	<button type="submit">Conferma Ordine</button>
+		</form>
+		
+		<form th:if="${ordineSuccess != null}">
+			<b><a th:text="|Ordine Confermato al tavolo ${ordine.numTavolo}|">Numero Tavolo</a></b>			
+		</form>		
+	</div>
+	
+	
+	
+	
+	
+	
+		<!-- 
  		&nbsp;
 		<table class="Prodotto" th:each="rigaOrdine : ${carrelloDaMostrare}">
 			<tr>
@@ -49,31 +125,9 @@
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<form style="width: 400px">
-					<b><a  th:text="|${ordine.totaleOrdine} &euro;|">Totale</a></b>
-		</form>
+		 -->
 		
-		<form   th:if="${ordineSuccess == null}"
-				th:action="@{/confermaOrdine}"
-					      th:method="POST">
-					      <b>Seleziona Tavolo:</b>
-					      <select name="numTavolo" th:value = "${numTavolo}" size="1">
-		            		<option th:each = "numTavolo : ${numTavoli}"
-		            				th:text = "|${numTavolo}|"
-		            				th:value = "${numTavolo}">Numero</option>
-		            	</select>
-					      <button type="submit">Conferma Ordine</button>
-		</form>
 		
-		<form   th:if="${ordineSuccess != null}"><b>Ordine Confermato</b><br>
-				<b>Identificativo Ordine:</b>
-				<b><a  th:text="|${ordine.id}|">Totale</a></b><br>
-				<b>Orario Ordine:</b>
-				<b><a  th:text="|${ordine.dataOrdine}|">Totale</a></b><br>
-				<b>Sei al Tavolo:</b>
-				<b><a  th:text="|${ordine.numTavolo}|">Numero Tavolo</a></b>
-		</form>		
-	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>
 </body>
