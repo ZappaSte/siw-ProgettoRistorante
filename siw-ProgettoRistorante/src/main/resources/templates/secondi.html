@@ -20,9 +20,10 @@
 				<td style="width: 400px">
 					<b><a  th:text="${prodotto.nome}">Nome</a></b>
 				</td>
-				<td>
-					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>
-				</td>
+				<td style="width: 100px">
+					<i><a  th:text="|${prodotto.prezzo} &euro;|">Prezzo</a></i>	
+							
+				</td>				
 				<td th:if="${ristoratoreCorrente == null}">						
 					<form th:action="@{'/prodotto' + '/' + ${prodotto.id} +  '/' + 'addProdottoCarrello'}"
 					      th:method="POST">

@@ -21,14 +21,6 @@
 					<th style="width: 150px; text-align: center;">Totale</th>
 				</tr>
 			</thead>
-			<tfoot>
-				<tr>
-					<td style="width: 100px; text-align: center;"></td>
-					<td style="width: 300px; text-align: center;"></td>
-					<td style="width: 150px; text-align: center;"></td>
-					<td style="width: 150px; text-align: center;">Totale Guadagno</td>
-				</tr>
-			</tfoot>
 			<tbody>
 				<tr th:each="ordine : ${ordini}">
 					<td style="width: 100px; text-align: center;" th:text="${ordine.id}">Id</td>
@@ -43,6 +35,10 @@
 				</tr>
 			</tbody>
 		</table>
+		&nbsp;
+		<form>
+			<input class="button" type="button" value="Indietro" onClick="javascript:history.back()" name="button">
+		</form>
 	</div>
 	
 	<div th:replace="fragments/base.html :: footer"></div>
