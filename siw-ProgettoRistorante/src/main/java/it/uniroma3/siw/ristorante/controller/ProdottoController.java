@@ -290,7 +290,7 @@ public class ProdottoController {
 			model.addAttribute("carrelloDaMostrare",ordine.getRigheOrdine());
 			model.addAttribute("ordine", ordine);
 			session.setAttribute("carrello", ordine);
-			return "carrello";
+			return "redirect:/carrello";
 		}
 	}
 	
